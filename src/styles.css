@@ -1,1 +1,155 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* Imagen de tabla */
+
+.img-rounded {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50% !important; */
+}
+
+
+/*Estilos de tarjeta*/
+
+.title-entidad {
+    vertical-align: middle;
+    line-height: 2rem;
+}
+
+.card-entidad {
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(115, 115, 115, 0.4);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(115, 115, 115, 0.4);
+    box-shadow: 0px 0px 20px 0px rgba(115, 115, 115, 0.4);
+    border: 0px solid #d7d7d7;
+    border-radius: .125rem;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    display: block;
+    margin-top: 1rem;
+    position: relative;
+    width: 100%;
+}
+
+
+/*Buscador de la tabla*/
+
+input.buscar-input:focus {
+    -webkit-appearance: none;
+    /* background-image: linear-gradient(transparent 95%, #0094d2 95%); */
+    background-repeat: no-repeat no-repeat;
+    background-size: 100% 100% !important;
+    border-bottom: 1px solid #9a9a9a;
+    border-radius: 0;
+    border-width: 0;
+    box-shadow: none;
+    /* color: #000; */
+    display: inline-block;
+    height: 1rem;
+    margin: 0;
+    min-width: 2.5rem;
+    overflow: visible;
+    padding: 0 0 0 2rem !important;
+    touch-action: manipulation;
+    transition-delay: 0s;
+    transition-duration: .2s;
+    transition-property: background-size;
+    transition-timing-function: ease;
+    width: 100%;
+}
+
+input.buscar-input {
+    background-repeat: no-repeat no-repeat;
+    background-size: 0 100%;
+    border-bottom: 1px solid #9a9a9a;
+    box-shadow: none;
+    /* color: #000; */
+    display: inline-block;
+    height: 2rem;
+    min-width: 2.5rem;
+    overflow: visible;
+    padding: 0 0 0 2rem !important;
+    touch-action: manipulation;
+    transition-delay: 0s;
+    transition-duration: .2s;
+    transition-property: background-size;
+    transition-timing-function: ease;
+    width: 100%;
+}
+
+.buscar-input-ico {
+    position: relative;
+    left: .5rem;
+    top: .6rem;
+    /* color: #007cbb; */
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+
+/*Spinner*/
+
+.spin {
+    margin-top: 3rem !important;
+}
+
+
+/*Tabla*/
+
+.datagrid-body {
+    overflow-y: unset !important;
+}
+
+.datagrid .datagrid-body .datagrid-row .datagrid-cell {
+    line-height: 1.6rem !important;
+    /* margin-bottom: -0.5rem !important; */
+    /* padding-top: 0.2rem !important; */
+    /* padding-top: 0.2rem !important; */
+}
+
+.datagrid .datagrid-row-actions clr-icon {
+    vertical-align: middle !important;
+    height: 1rem !important;
+}
+
+.datagrid .datagrid-body .datagrid-row .datagrid-action-toggle {
+    cursor: pointer;
+    color: #565656;
+    border: none;
+    background: none;
+    width: 100%;
+    margin-top: 0.5rem !important;
+    /* margin-left: 0.5rem !important; */
+    padding: 0px !important;
+}
+
+
+/* Formularios font-size */
+
+.clr-subtext {
+    font-size: 0.55rem !important;
+}
+
+.clr-input {
+    font-size: 0.59rem !important;
+}
+
+.boton {
+    font-size: 0.5rem !important;
+    width: 100% !important;
+    max-height: 2.3rem !important;
+    height: 2rem !important;
+    padding: 0px !important;
+    border: 0px !important;
+}
+
+.he {
+    line-height: 1.7rem !important;
+}
+
+.imagen {
+    margin: 0 auto;
+    width: 250px !important;
+    height: 250px !important;
+}

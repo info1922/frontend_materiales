@@ -1,0 +1,35 @@
+<div class="crl-row">
+    <div class="clr-example">
+        <div class="main-container nav-group-text">
+            <app-header></app-header>
+            <div class="content-container">
+                <div class="content-area">
+
+                    <div class="clr-col-12">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+                <clr-vertical-nav [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapse">
+
+                    <ng-container *ngFor="let item of case2">
+
+                        <clr-vertical-nav-group>
+                            <clr-icon [attr.shape]="item.icon" clrVerticalNavIcon></clr-icon>
+                            {{item.label}}
+                            <clr-vertical-nav-group-children *clrIfExpanded>
+                                <li *ngFor="let subs of item.submenu" class="submenu">
+                                    <a clrVerticalNavLink [routerLink]="[subs.url]">
+                                    {{subs.label}}
+                                </a>
+                                </li>
+                            </clr-vertical-nav-group-children>
+                        </clr-vertical-nav-group>
+
+                    </ng-container>
+
+                </clr-vertical-nav>
+            </div>
+        </div>
+    </div>
+
+</div>

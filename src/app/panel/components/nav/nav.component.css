@@ -1,0 +1,18 @@
+.submenu {
+    list-style-type: none !important;
+}
+
+.gemini-trigger {
+    margin-left: -23px;
+    margin-top: -25px;
+}
+
+
+/* .clr-vertical-nav.is-collapsed>.nav-group-trigger>.nav-group-trigger-icon {
+    margin-left: 0.3rem !important;
+} */
+
+.clr-vertical-nav.is-collapsed {
+    width: 2.5rem !important;
+    /* margin-left: -3px !important; */
+}

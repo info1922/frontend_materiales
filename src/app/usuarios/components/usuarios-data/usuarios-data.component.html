@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-lg-8 clr-offset-lg-2 col-md-8 clr-offset-md-2 col-sm-12 col-xs-12">
+
+        <div class="card-entidad">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 title-entidad">Usuarios</div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+
+                        <!-- <button class="btn  btn-primary btn-icon">
+                        <clr-icon shape="plus" style="margin-right: 5px">
+                        </clr-icon>Nuevo usuario
+                      </button> -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-block">
+
+                <clr-icon shape="search" size="24" class="buscar-input-ico"></clr-icon>
+                <input type="text" class="buscar-input" placeholder="Buscar usuario">
+                <!-- <div class="spin text-center">
+                    <span class="spinner spinner-md">
+                    </span> <br> <br> Cargando datos ...
+                </div> -->
+
+                <div class="card-title" style="overflow-y: 0">
+
+                    <clr-datagrid style="width: 99.99%; height: auto">
+                        <clr-dg-column>Imagen</clr-dg-column>
+                        <clr-dg-column>Nombre</clr-dg-column>
+                        <clr-dg-column>Dirección</clr-dg-column>
+                        <clr-dg-column>No. de materiales</clr-dg-column>
+                        <clr-dg-column>Ultima modificación</clr-dg-column>
+                        <clr-dg-placeholder>No se encontraron lugares</clr-dg-placeholder>
+                        <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+                            <clr-dg-action-overflow>
+                                <!-- <button class="action-item" (click)="onEdit(user)"></button> -->
+                                <button class="action-item" (click)="onEdit(user)">Actualizar</button>
+                                <button class="action-item" (click)="onDelete(user)">Eliminar</button>
+                            </clr-dg-action-overflow>
+                            <clr-dg-cell class="celda"><img src="assets/placeholder_60x60.png" class="img-rounded cursor"></clr-dg-cell>
+                            <clr-dg-cell class="celda"> {{user.id}}</clr-dg-cell>
+                            <clr-dg-cell>{{user.name}}</clr-dg-cell>
+                            <clr-dg-cell>{{user.creation}}</clr-dg-cell>
+                            <clr-dg-cell>{{user.color}}</clr-dg-cell>
+                        </clr-dg-row>
+
+                        <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->
+                        <clr-dg-footer>
+                            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} usuarios
+                            <clr-dg-pagination #pagination [clrDgPageSize]="5">
+                            </clr-dg-pagination>
+                        </clr-dg-footer>
+                    </clr-datagrid>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

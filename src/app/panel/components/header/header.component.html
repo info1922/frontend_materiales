@@ -1,0 +1,88 @@
+<div class="crl-row">
+    <div class="crl-col-sm-12 crl-col-md-12">
+
+        <!-- <clr-main-container>
+            <clr-header>
+
+
+
+
+                <div class="header-nav" [clr-nav-level]="1">
+                    Menu
+                </div>
+                ...
+            </clr-header>
+            <div class="content-container">
+                <main class="content-area">
+                    ...
+                </main>
+            </div>
+        </clr-main-container> -->
+        <header class="header header-1">
+            <div class="branding">
+                <a href="#">
+                    <clr-icon shape="list" class="logo"></clr-icon>
+                    <span class="title2 ">Control de materiales</span>
+                </a>
+            </div>
+
+            <form action="" class="search">
+                <label for="search_input" class="sear-nav">
+                        <input id="search_input" type="text" placeholder="Busqueda general">
+                </label>
+            </form>
+
+
+            <div class="header-actions">
+                <clr-dropdown>
+                    <button class="nav-icon" clrDropdownTrigger id="dropdown-with-icons">
+                            <clr-icon shape="bell" class="has-badge is-solid "></clr-icon>
+                    </button>
+                    <clr-dropdown-menu clrPosition="bottom-right" class="dropdown-bell">
+                        <div clrDropdownItem> <b class="margin-right-0_25">Notificaciones</b> <span class="badge badge-danger">12</span></div>
+                        <a href="javascript://" clrDropdownItem class="dropdown-item">
+                            <clr-icon shape="trash" class="is-error"></clr-icon>
+                            Se han eliminado algunos registros
+                        </a>
+                        <a href="javascript://" clrDropdownItem>
+                            <clr-icon shape="check" class="is-success"></clr-icon>
+                            Perfil de usuario</a>
+                        <a href="javascript://" clrDropdownItem>
+                            <clr-icon shape="map-marker" class="is-info"></clr-icon>
+                            Se actualizo un lugar</a>
+                    </clr-dropdown-menu>
+
+                </clr-dropdown>
+                <clr-dropdown>
+                    <button class="nav-icon" clrDropdownTrigger id="dropdown-with-icons">
+                      <!-- <clr-icon shape="cog"></clr-icon>
+                      <clr-icon shape="caret down"></clr-icon> -->
+                      <img src="assets/project.png" alt="" class="avatar">
+                    </button>
+                    <clr-dropdown-menu clrPosition="bottom-right">
+                        <a clrDropdownItem>
+
+                            <div class="toggle-switch">
+                                <div class="tema">
+                                    <input [ngModel]="test" [checked]="test" (change)="checkClicked(test)" type="checkbox" id="toggle_1">
+                                    <label for="toggle_1">
+                                        <clr-icon shape="eye" class="ico"></clr-icon>
+                                        Tema oscuro
+                                    </label>
+                                </div>
+                            </div>
+
+                        </a>
+                        <a href="javascript://" clrDropdownItem>
+                            <clr-icon shape="help-info" class="ico"></clr-icon> About</a>
+                        <a href="javascript://" clrDropdownItem>
+                            <clr-icon shape="cog"></clr-icon> Perfil de usuario</a>
+                        <a href="javascript://" clrDropdownItem>
+                            <clr-icon shape="logout"></clr-icon> Cerrar sesión</a>
+                    </clr-dropdown-menu>
+                </clr-dropdown>
+            </div>
+        </header>
+    </div>
+
+</div>
