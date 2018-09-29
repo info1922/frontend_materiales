@@ -10,7 +10,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { VerticalNavCases } from './components/nav/menu';
 import { LugaresModule } from '../lugares/lugares.module';
 import { MaterialesModule } from '../materiales/materiales.module';
+import { PipesModule } from '../pipes/pipes.module';
 import { UsuariosModule } from '../usuarios/usuarios.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from '../core/services/http-interceptor.service';
 
 @NgModule({
   imports: [
@@ -18,6 +21,7 @@ import { UsuariosModule } from '../usuarios/usuarios.module';
     FormsModule,
     ReactiveFormsModule,
     PanelRoutingModule,
+    PipesModule,
     UsuariosModule,
     LugaresModule,
     MaterialesModule,
@@ -26,6 +30,8 @@ import { UsuariosModule } from '../usuarios/usuarios.module';
     ClrFormsNextModule,
   ],
   declarations: [PanelComponent, MainContentComponent, NavComponent, HeaderComponent],
-  providers: [VerticalNavCases]
+  providers: [VerticalNavCases, {
+    provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
+  }]
 })
 export class PanelModule { }

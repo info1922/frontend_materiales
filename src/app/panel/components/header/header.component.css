@@ -102,5 +102,5 @@
 }
 
 .toggle-switch input[type='checkbox']+label::after {
-    top: 0.09rem !important;
+    top: 0.08rem !important;
 }

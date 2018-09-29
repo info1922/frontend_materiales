@@ -6,10 +6,15 @@ import { ClarityModule, ClrCheckboxNextModule, ClrFormsNextModule } from '@clr/a
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+import { AuthComponent } from './auth/auth.component';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +24,10 @@ import { AppRoutingModule } from './app.routing';
     ClarityModule,
     ClrFormsNextModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthModule,
+    CoreModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

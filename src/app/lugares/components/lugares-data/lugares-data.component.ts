@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LugaresService } from '../../services/lugares.service';
+import { Lugares } from '../../models/lugares';
 
 @Component({
   selector: 'app-lugares-data',
@@ -8,29 +10,36 @@ import { Router } from '@angular/router';
 })
 export class LugaresDataComponent implements OnInit {
 
-  constructor( private router: Router) { }
+  constructor( private router: Router, private lugarService: LugaresService) { }
 
-  users = [
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
-    {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'}
-  ];
-
-  total = this.users.length;
+  dataLugares: Lugares[] = [];
+  cargando = true;
 
   ngOnInit() {
+    this.getLugares();
   }
 
-  onEdit() {
-    console.log('Editar');
+  getLugares() {
+    this.cargando = true;
+    this.lugarService.getLugares().subscribe((data: any) => {
+      this.dataLugares = data.lugarlist;
+      this.cargando = false;
+      console.log(data.lugarlist);
+    }, err => {
+      console.log(err);
+    });
   }
 
-  onDelete() {
-    console.log('Eliminar');
+  onEdit(lugar) {
+    console.log('Editar', lugar);
+  }
+
+  onDelete(lugar) {
+    console.log('Eliminar', lugar);
+  }
+
+  onDetail(lugar) {
+    console.log('Detalles', lugar);
   }
 
   newLugar() {

@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+    <form class="login" [formGroup]="authForm" novalidate (ngSubmit)="onSubmit()">
+        {{this.authForm.value | json}}
+        <section class="title">
+            <h3 class="welcome">Bienvenido</h3>
+            Administrador de materiales
+        </section>
+        <div class="login-group">
+            <input formControlName="email" class="username" type="text" id="login_username" placeholder="Correo">
+            <input formControlName="password" class="password" type="password" id="login_password" placeholder="Contraseña">
+            <clr-alert [clrAlertType]="'alert-danger'" *ngIf="!closed" (clrAlertClosedChange)="closed=true">
+                <div clr-alert-item class="alert-item">
+                    <span class="alert-text">
+						Usuario o contraseña incorrectos.
+					</span>
+                </div>
+            </clr-alert>
+            <button type="submit" [disabled]="!authForm.valid" class="btn btn-primary">Ingresar</button>
+            <a href="#" class="signup">Crea una cuenta aquí</a>
+        </div>
+    </form>
+</div>

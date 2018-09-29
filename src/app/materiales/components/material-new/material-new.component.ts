@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-material-new',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaterialNewComponent implements OnInit {
 
-  constructor() { }
+
+  materialForm: FormGroup;
+  sub = null;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.crearFormulario();
+    this.sub = null;
+  }
+
+  returnMateriales() {
+    this.router.navigate(['panel', 'materiales']);
+  }
+
+  crearFormulario() {
+    this.materialForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      cantidad: new FormControl('', Validators.required)
+    });
+  }
+
+  seleccionImage(event) {
+    console.log(event);
   }
 
 }

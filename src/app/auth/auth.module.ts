@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialesDataComponent } from './components/materiales-data/materiales-data.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule, ClrCheckboxNextModule, ClrFormsNextModule } from '@clr/angular';
-import { MaterialNewComponent } from './components/material-new/material-new.component';
 
 @NgModule({
   imports: [
@@ -14,7 +12,6 @@ import { MaterialNewComponent } from './components/material-new/material-new.com
     ClarityModule,
     ClrFormsNextModule,
   ],
-  declarations: [MaterialesDataComponent, MaterialNewComponent],
-  exports: [MaterialesDataComponent]
+  declarations: []
 })
-export class MaterialesModule { }
+export class AuthModule { }

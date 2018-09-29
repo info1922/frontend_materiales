@@ -19,10 +19,10 @@
 
                 <clr-icon shape="search" size="24" class="buscar-input-ico"></clr-icon>
                 <input type="text" class="buscar-input" placeholder="Buscar lugar">
-                <!-- <div class="spin text-center">
+                <div class="spin text-center" *ngIf="cargando">
                     <span class="spinner spinner-md">
                     </span> <br> <br> Cargando datos ...
-                </div> -->
+                </div>
 
                 <div class="card-title" style="overflow-y: 0">
 
@@ -33,17 +33,20 @@
                         <clr-dg-column>No. de materiales</clr-dg-column>
                         <clr-dg-column>Ultima modificación</clr-dg-column>
                         <clr-dg-placeholder>No se encontraron lugares</clr-dg-placeholder>
-                        <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+                        <clr-dg-row *clrDgItems="let lugar of dataLugares" [clrDgItem]="lugar">
                             <clr-dg-action-overflow>
                                 <!-- <button class="action-item" (click)="onEdit(user)"></button> -->
-                                <button class="action-item" (click)="onEdit(user)">Actualizar</button>
-                                <button class="action-item" (click)="onDelete(user)">Eliminar</button>
+                                <button class="action-item" (click)="onEdit(lugar)">Actualizar</button>
+                                <button class="action-item" (click)="onDelete(lugar)">Eliminar</button>
+                                <button class="action-item" (click)="onDetail(lugar)">Más detalles</button>
                             </clr-dg-action-overflow>
-                            <clr-dg-cell class="celda"><img src="assets/placeholder_60x60.png" class="img-rounded cursor"></clr-dg-cell>
-                            <clr-dg-cell class="celda"> {{user.id}}</clr-dg-cell>
-                            <clr-dg-cell>{{user.name}}</clr-dg-cell>
-                            <clr-dg-cell>{{user.creation}}</clr-dg-cell>
-                            <clr-dg-cell>{{user.color}}</clr-dg-cell>
+                            <clr-dg-cell class="celda"><img [src]="lugar.img | imagen:'lugar'" class="img-rounded cursor"></clr-dg-cell>
+                            <!-- <clr-dg-cell class="celda"> {{lugar.id}}</clr-dg-cell> -->
+                            <clr-dg-cell>{{lugar.nombre}}</clr-dg-cell>
+                            <clr-dg-cell *ngIf="!lugar.direccion">Sin dirección</clr-dg-cell>
+                            <clr-dg-cell *ngIf="lugar.direccion">{{lugar.direccion}}</clr-dg-cell>
+                            <clr-dg-cell>{{(lugar.materiales)?.length}}</clr-dg-cell>
+                            <clr-dg-cell>{{lugar.updatedAt | date}}</clr-dg-cell>
                         </clr-dg-row>
 
                         <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->

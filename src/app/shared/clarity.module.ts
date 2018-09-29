@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClrCheckboxNextModule, ClrFormsNextModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ClarityModule,
     ClrFormsNextModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ],
   exports: [
     BrowserAnimationsModule,

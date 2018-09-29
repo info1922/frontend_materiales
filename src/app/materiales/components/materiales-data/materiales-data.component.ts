@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class MaterialesDataComponent implements OnInit {
 
+  constructor(private router: Router) { }
+
   users = [
     {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
     {id: 1, name: 'Ivan', creation: 'datos', color: 'Rojo'},
@@ -20,7 +22,6 @@ export class MaterialesDataComponent implements OnInit {
 
   total = this.users.length;
 
-  constructor(private router: Router) { }
 
   ngOnInit() {
   }

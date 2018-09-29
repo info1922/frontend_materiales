@@ -1,3 +1,73 @@
-<p>
-  material-new works!
-</p>
+<div class="row">
+    <div class="col-lg-6 clr-offset-lg-3 col-md-6 clr-offset-md-3 col-sm-12 col-xs-12">
+
+        <div class="card-entidad">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 title-entidad">Material </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+
+                        <button class="btn btn-primary btn-icon" (click)="returnMateriales()">
+                          <clr-icon shape="undo" style="margin-right: 5px">
+                          </clr-icon>Regresar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-block">
+
+                <!-- <clr-icon shape="search" size="24" class="buscar-input-ico"></clr-icon>
+              <input type="text" class="buscar-input" placeholder="Buscar lugar"> -->
+                <!-- <div class="spin text-center">
+                  <span class="spinner spinner-md">
+                  </span> <br> <br> Cargando datos ...
+              </div> -->
+
+                <div class="card-title" style="overflow-y: 0">
+
+                    <!-- Formulario del nuevo lugar -->
+                    <form class="clr-form" [formGroup]="materialForm" #f="ngForm">
+
+                        <clr-input-container>
+
+                            <input clrInput type="text" formControlName="name" placeholder="Nombre" />
+                            <clr-control-helper><strong>Escribe un nombre del material.</strong> </clr-control-helper>
+                            <clr-control-error><strong>El nombre del material es necesario, por favor escribe un nombre.</strong></clr-control-error>
+                        </clr-input-container>
+
+                        <clr-input-container>
+
+                            <input clrInput type="text" formControlName="cantidad" placeholder="Dirección" />
+                            <clr-control-helper><strong>Cantidad de materiales.</strong> </clr-control-helper>
+                            <clr-control-error><strong>La cantidad es necesaria, por favor escribe una cantidad.</strong></clr-control-error>
+
+                        </clr-input-container>
+
+
+                        <div class="clr-form-control clr-row">
+                            <div class="clr-control-container clr-col-xs-12 clr-col-md-12">
+                                <div class="clr-input-wrapper">
+                                    <input type="file" id="example" placeholder="Example Input" class="btn btn-outline boton" (change)="seleccionImage($event)" [(ngModel)]="this.sub" [ngModelOptions]="{standalone: true}">
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+                                <clr-control-helper class="he"> <strong>Elije una imagen para este material.</strong> </clr-control-helper>
+                            </div>
+
+                            <img src="assets/img/no-imagen.png" class="imagen">
+                            <br>
+
+                        </div>
+
+
+                        <button class="btn btn-primary btn-icon"><clr-icon shape="floppy"  style="margin-right: 5px"></clr-icon>Guardar</button>
+                        <button class="btn btn-danger btn-icon"><clr-icon shape="times"  style="margin-right: 5px"></clr-icon>Cancelar</button>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
