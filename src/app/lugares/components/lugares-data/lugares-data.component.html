@@ -18,7 +18,7 @@
             <div class="card-block">
 
                 <clr-icon shape="search" size="24" class="buscar-input-ico"></clr-icon>
-                <input type="text" class="buscar-input" placeholder="Buscar lugar">
+                <input #input (keyup)="buscarLugar(input.value)" type="text" class="buscar-input" placeholder="Buscar lugar">
                 <div class="spin text-center" *ngIf="cargando">
                     <span class="spinner spinner-md">
                     </span> <br> <br> Cargando datos ...
@@ -38,7 +38,7 @@
                                 <!-- <button class="action-item" (click)="onEdit(user)"></button> -->
                                 <button class="action-item" (click)="onEdit(lugar)">Actualizar</button>
                                 <button class="action-item" (click)="onDelete(lugar)">Eliminar</button>
-                                <button class="action-item" (click)="onDetail(lugar)">Más detalles</button>
+                                <button class="action-item" (click)="onDetail(lugar._id)">Más detalles</button>
                             </clr-dg-action-overflow>
                             <clr-dg-cell class="celda"><img [src]="lugar.img | imagen:'lugar'" class="img-rounded cursor"></clr-dg-cell>
                             <!-- <clr-dg-cell class="celda"> {{lugar.id}}</clr-dg-cell> -->
@@ -62,3 +62,65 @@
         </div>
     </div>
 </div>
+
+<!-- Modal mas información -->
+<clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'lg'" *ngFor="let lcg of datoLugar">
+    <h3 class="modal-title">Detalles del lugar</h3>
+
+    <div class="modal-body">
+        <div class="clr-row clr-align-items-center">
+            <div class="clr-col">
+                <p class="p4 dato">Nombre: </p>
+                <p class="dato">{{lcg.nombre}}</p>
+            </div>
+            <div class="clr-col">
+                <p class="p4 dato">Dirección: </p>
+                <p class="dato" *ngIf="!lcg.direccion">Sin dirección</p>
+                <p class="dato" *ngIf="lcg.direccion">{{lcg.direccion}}</p>
+            </div>
+            <div class="clr-col">
+                <p class="p4 dato">Usuario: </p>
+                <p class="dato">{{lcg.usuario.nombre}}</p>
+            </div>
+        </div>
+        <br>
+        <div class="clr-row clr-align-items-center">
+            <div class="clr-col">
+                <p class="p4 dato">Fecha de creación: </p>
+                <p class="dato">{{lcg.createdAt | date}}</p>
+            </div>
+            <div class="clr-col">
+                <p class="p4 dato">Ultima modificación: </p>
+                <p class="dato">{{lcg.updatedAt | date}}</p>
+            </div>
+            <div class="clr-col">
+                <p class="p4 dato">Imagen: <img [src]="lcg.img | imagen:'lugar'" class="img-rounded cursor mod"></p>
+            </div>
+        </div>
+        <br>
+        <p class="p4">Materiales asignados a este lugar</p>
+
+        <clr-datagrid style="width: 99.99%; height: auto">
+            <clr-dg-column>Nombre</clr-dg-column>
+            <clr-dg-column>Cantidad</clr-dg-column>
+            <clr-dg-column>Fecha de creación</clr-dg-column>
+            <clr-dg-column>Ultima modificación</clr-dg-column>
+            <clr-dg-placeholder>Este lugar aun no cuenta con materiales asignados</clr-dg-placeholder>
+            <clr-dg-row *clrDgItems="let mt of lcg.materiales" [clrDgItem]="mt">
+                <clr-dg-cell>{{mt.title}}</clr-dg-cell>
+                <clr-dg-cell>{{mt.cantidad}}</clr-dg-cell>
+                <clr-dg-cell>{{mt.createdAt | date}}</clr-dg-cell>
+                <clr-dg-cell>{{mt.updatedAt | date}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-footer>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} materiales
+                <clr-dg-pagination #pagination [clrDgPageSize]="5">
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+    </div>
+</clr-modal>

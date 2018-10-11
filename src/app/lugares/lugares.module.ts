@@ -4,9 +4,11 @@ import { LugaresDataComponent } from './components/lugares-data/lugares-data.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule, ClrCheckboxNextModule, ClrFormsNextModule } from '@clr/angular';
 import { LugarNewComponent } from './components/lugar-new/lugar-new.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LugaresService } from './services/lugares.service';
 import { PipesModule } from '../pipes/pipes.module';
+import { LugarService } from './services/lugar.service';
+import { HttpInterceptorService } from '../core/services/http-interceptor.service';
 
 @NgModule({
   imports: [
@@ -21,6 +23,6 @@ import { PipesModule } from '../pipes/pipes.module';
   ],
   declarations: [LugaresDataComponent, LugarNewComponent],
   exports: [LugaresDataComponent],
-  providers: [LugaresService]
+  providers: [LugaresService, LugarService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}]
 })
 export class LugaresModule { }

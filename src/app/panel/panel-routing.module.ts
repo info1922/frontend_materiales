@@ -7,36 +7,49 @@ import { MaterialesDataComponent } from '../materiales/components/materiales-dat
 import { UsuariosDataComponent } from '../usuarios/components/usuarios-data/usuarios-data.component';
 import { LugarNewComponent } from '../lugares/components/lugar-new/lugar-new.component';
 import { MaterialNewComponent } from '../materiales/components/material-new/material-new.component';
+import { AuthGuardService } from '../core/services/auth-guard.service';
 
 const routes: Routes = [
   {
     path : '',
     component: PanelComponent,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: '',
-        component: MainContentComponent
+        component: MainContentComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path: 'usuarios',
-        component: UsuariosDataComponent
+        component: UsuariosDataComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path: 'lugares',
-        component: LugaresDataComponent
+        component: LugaresDataComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path: 'lugares/nuevo',
-        component: LugarNewComponent
+        component: LugarNewComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path: 'materiales',
-        component: MaterialesDataComponent
+        component: MaterialesDataComponent,
+        canActivateChild: [AuthGuardService]
       },
       {
         path: 'materiales/nuevo',
-        component: MaterialNewComponent
+        component: MaterialNewComponent,
+        canActivateChild: [AuthGuardService]
       },
+      {
+        path: '**',
+        redirectTo: 'panel',
+        canActivateChild: [AuthGuardService]
+      }
     ]
   },
   {

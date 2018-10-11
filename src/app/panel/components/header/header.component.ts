@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID, Input} from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { JwtService } from '../../../core/services/jwt.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID)
-  private platformId: Object) {
+    private platformId: Object,
+    private jwtService: JwtService,
+    private router: Router) {
     this.cargarAjuste();
    }
 
@@ -29,16 +33,6 @@ export class HeaderComponent implements OnInit {
 
 
   cargarAjuste() {
-    // if (localStorage.getItem('ajustes')) {
-    //   this.ajuste = JSON.parse(localStorage.getItem('ajustes'));
-    //   this.test = this.ajuste.value;
-    //   this.checkClicked(this.ajuste.value);
-    //   console.log('Valor de value en localStorage: ', this.ajuste.value);
-    // } else {
-    //   this.test = this.ajuste.value;
-    //   this.checkClicked(this.ajuste.value);
-    //   console.log('Valor de value en localStorage: ', this.ajuste.value);
-    // }
 
     if (!localStorage.getItem('ajustes')) {
       this.test = false;
@@ -77,6 +71,11 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('ajustes', JSON.stringify(this.themes[0]));
     }
 
+  }
+
+  logout() {
+    this.jwtService.destroyToken();
+    this.router.navigate(['/login']);
   }
 
 

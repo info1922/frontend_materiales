@@ -13,3 +13,12 @@ export interface SignupRsp {
     success: boolean;
     message: string;
 }
+
+export class Usuario {
+    constructor(
+        public nombre: string,
+        public apellido: string,
+        public email: string,
+        public password: string,
+    ) {}
+}

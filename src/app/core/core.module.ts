@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { JwtService } from './services/jwt.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { NoAuthGuardService } from './services/no-auth-guard.service';
 
 @NgModule({
   imports: [
@@ -11,6 +13,6 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     HttpClientModule
   ],
   declarations: [],
-  providers: [AuthService, JwtService, HttpInterceptorService]
+  providers: [AuthService, JwtService, HttpInterceptorService, AuthGuardService]
 })
 export class CoreModule { }
