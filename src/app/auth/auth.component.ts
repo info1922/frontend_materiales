@@ -86,7 +86,7 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Onsubmit');
+    // console.log('Onsubmit');
 
     // tslint:disable-next-line:no-debugger
 
@@ -105,7 +105,7 @@ export class AuthComponent implements OnInit {
         this.authService.singup(usuario)
             .subscribe(data => {
               // tslint:disable-next-line:no-debugger
-                console.log(data);
+                // console.log(data);
                 this.router.navigate(['login']);
             }, err => {
                 this.closed = false;

@@ -27,17 +27,17 @@
                 <div class="card-title" style="overflow-y: 0">
 
                     <!-- Formulario del nuevo lugar -->
-                    <form class="clr-form" [formGroup]="exampleForm" #f="ngForm" (ngSubmit)="registrarLugar()">
-                        {{this.exampleForm.value | json}}
+                    <form class="clr-form" #f="ngForm" (ngSubmit)="registrarLugar(f)">
+                        <!-- {{this.exampleForm.value | json}} -->
                         <clr-input-container>
-                            <input clrInput type="text" formControlName="nombre" placeholder="Nombre" />
+                            <input clrInput type="text" [(ngModel)]="lugar.nombre" name="nombre" placeholder="Nombre" required />
                             <clr-control-helper><strong>Escribe un nombre para el lugar.</strong> </clr-control-helper>
                             <clr-control-error><strong>El nombre del lugar es necesario, por favor escribe un nombre.</strong></clr-control-error>
                         </clr-input-container>
 
                         <clr-input-container>
 
-                            <input clrInput type="text" formControlName="direccion" placeholder="Dirección" />
+                            <input clrInput type="text" [(ngModel)]="lugar.direccion" name="direccion" placeholder="Dirección" />
                             <clr-control-helper><strong>Escribe la dirección del lugar.</strong> </clr-control-helper>
                             <clr-control-error><strong>La dirección del lugar es necesaria, por favor escribe una dirección.</strong></clr-control-error>
 
@@ -52,16 +52,22 @@
                                 </div>
                                 <clr-control-helper class="he"> <strong>Elije una imagen para este lugar.</strong> </clr-control-helper>
                             </div>
-
-                            <img *ngIf="!imagenTem" [src]="'imagen' | imagen" class="imagen">
-                            <img *ngIf="imagenTem" [src]="imagenTem" class="imagen">
+                            <div *ngIf="!lugar._id">
+                                <img *ngIf="!imagenTem" [src]="'imagen' | imagen" class="imagen">
+                                <img *ngIf="imagenTem" [src]="imagenTem" class="imagen">
+                            </div>
                             <br>
-
+                            <div *ngIf="lugar._id">
+                                <img *ngIf="!imagenTem" [src]="lugar.img | imagen: 'lugar'" class="imagen">
+                                <img *ngIf="imagenTem" [src]="imagenTem" class="imagen">
+                            </div>
+                            <br>
                         </div>
 
 
-                        <button [disabled]="!exampleForm.valid" type="submit" class="btn btn-primary btn-icon"><clr-icon shape="floppy"  style="margin-right: 5px"></clr-icon>Guardar</button>
-                        <button (click)="returnLugares()" class="btn btn-danger btn-icon"><clr-icon shape="times"  style="margin-right: 5px"></clr-icon>Cancelar</button>
+                        <button type="submit" class="btn btn-primary btn-icon"><clr-icon shape="floppy"  style="margin-right: 5px"></clr-icon>Guardar</button>
+                        <a (click)="returnLugares()" class="btn btn-danger btn-icon">
+                            <clr-icon shape="times" style="margin-right: 5px"></clr-icon>Cancelar</a>
 
 
                     </form>

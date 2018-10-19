@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -13,6 +13,7 @@ const BASE_URL = 'http://localhost:3000/api';
 })
 export class LugaresService {
 
+  public notificacion = new EventEmitter<any>();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -28,9 +29,9 @@ export class LugaresService {
     }));
   }
 
+  // Buscar para actualizar y para mas información
   buscarLugar(id: string) {
     const url = BASE_URL + '/lugar/' + id;
-
     return this.httpClient.get(url).pipe(map((resp: any) => {
       // console.log('Servicio: ', resp.lugar);
       const res = [resp.lugar];
@@ -40,10 +41,23 @@ export class LugaresService {
 
 
   crearLugar(lugar: Lugar) {
-    const url = BASE_URL + '/lugar';
-    return this.httpClient.post(url, lugar).pipe(map((resp: any) => {
-      return resp;
-    }));
+    let url = BASE_URL + '/lugar';
+
+    // Actualiza o agrega
+    if (lugar._id) {
+      console.log('Id del lugar: ', lugar._id);
+      // Actualizar
+      url += '/' + lugar._id;
+      return this.httpClient.put(url, lugar).pipe(map((resp: any) => {
+        console.log('Actualizado correctamente');
+        return resp;
+      }));
+    } else {
+      // Creando
+      return this.httpClient.post(url, lugar).pipe(map((resp: any) => {
+        return resp;
+      }));
+    }
   }
 
   subirArchivo(fileItem: File, tipo: string, id: string) {

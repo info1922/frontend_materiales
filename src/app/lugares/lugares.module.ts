@@ -9,10 +9,12 @@ import { LugaresService } from './services/lugares.service';
 import { PipesModule } from '../pipes/pipes.module';
 import { LugarService } from './services/lugar.service';
 import { HttpInterceptorService } from '../core/services/http-interceptor.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -22,7 +24,7 @@ import { HttpInterceptorService } from '../core/services/http-interceptor.servic
     PipesModule
   ],
   declarations: [LugaresDataComponent, LugarNewComponent],
-  exports: [LugaresDataComponent],
+  exports: [LugaresDataComponent, RouterModule],
   providers: [LugaresService, LugarService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}]
 })
 export class LugaresModule { }

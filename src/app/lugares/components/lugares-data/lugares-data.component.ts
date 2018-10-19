@@ -54,9 +54,9 @@ export class LugaresDataComponent implements OnInit {
   }
 
 
-  newLugar() {
-    this.router.navigate(['panel', 'lugares', 'nuevo']);
-  }
+  // newLugar() {
+  //   this.router.navigate(['panel', 'lugares', 'nuevo']);
+  // }
 
   buscarLugar(termino: string) {
 

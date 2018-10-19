@@ -13,6 +13,9 @@ export class Lugar {
         public nombre: string,
         public direccion?: string,
         public img?: string,
+        public materiales?: string,
+        public usuario?: string,
+        public timestamps?: string,
         public _id?: string
     ) { }
 }

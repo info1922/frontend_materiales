@@ -31,7 +31,7 @@ const routes: Routes = [
         canActivateChild: [AuthGuardService]
       },
       {
-        path: 'lugares/nuevo',
+        path: 'lugares/:id',
         component: LugarNewComponent,
         canActivateChild: [AuthGuardService]
       },
