@@ -20,6 +20,8 @@ export class LugarNewComponent implements OnInit {
   imagenTem: any;
   sub = null;
   standalone = true;
+  cargando = false;
+  cargandoImagen = false;
   //
 
   constructor(
@@ -37,8 +39,10 @@ export class LugarNewComponent implements OnInit {
 
   ngOnInit() {
     this.crearFormulario();
+    this.cargandoImagen = false;
     this.lugaresService.notificacion.subscribe(resp => {
       console.log('Respuesta notificacion: ', resp);
+      this.cargandoImagen = true;
     });
     this.sub = null;
   }
@@ -55,6 +59,7 @@ export class LugarNewComponent implements OnInit {
     if (f.invalid) {
       return;
     }
+    this.cargando = true;
     // console.log('Valor del formulario: ', this.exampleForm.value);
     this.sub = null || '';
     // console.log('Datos del formulario:', this.lugar);
@@ -64,6 +69,7 @@ export class LugarNewComponent implements OnInit {
         // console.log('Id del lugar desde componente ', data.lugarlist._id);
         this.subirImagen(data.lugar._id);
         console.log('Guardado correctamente');
+        this.cargando = false;
         this.router.navigate(['/panel/lugares', data.lugar._id]);
       }, err => {
         console.log('Error al guardar el lugar');

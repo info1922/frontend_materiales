@@ -17,6 +17,10 @@
             </div>
             <div class="card-block">
 
+                <div class="spin text-center" *ngIf="cargando">
+                    <span class="spinner spinner-md">
+                    </span> <br> <br> Guardando datos ...
+                </div>
                 <!-- <clr-icon shape="search" size="24" class="buscar-input-ico"></clr-icon>
                 <input type="text" class="buscar-input" placeholder="Buscar lugar"> -->
                 <!-- <div class="spin text-center">
@@ -24,7 +28,7 @@
                     </span> <br> <br> Cargando datos ...
                 </div> -->
 
-                <div class="card-title" style="overflow-y: 0">
+                <div class="card-title" style="overflow-y: 0" *ngIf="!cargando">
 
                     <!-- Formulario del nuevo lugar -->
                     <form class="clr-form" #f="ngForm" (ngSubmit)="registrarLugar(f)">
@@ -58,6 +62,10 @@
                             </div>
                             <br>
                             <div *ngIf="lugar._id">
+                                <div class="spin text-center" *ngIf="cargandoImagen">
+                                    <span class="spinner spinner-md">
+                                        </span> <br> <br> Cargando imagen ...
+                                </div>
                                 <img *ngIf="!imagenTem" [src]="lugar.img | imagen: 'lugar'" class="imagen">
                                 <img *ngIf="imagenTem" [src]="imagenTem" class="imagen">
                             </div>

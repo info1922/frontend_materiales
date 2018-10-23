@@ -109,6 +109,7 @@ export class AuthComponent implements OnInit {
                 this.router.navigate(['login']);
             }, err => {
                 this.closed = false;
+                console.log('Algo no esta funcionando bien');
                 console.log(err);
             });
     } else {
@@ -122,6 +123,7 @@ export class AuthComponent implements OnInit {
             this.router.navigate(['panel']);
             }, err => {
             this.closed = false;
+            console.log('Algo no esta funcionando bien');
             console.log(err);
         });
     }

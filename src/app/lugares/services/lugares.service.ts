@@ -87,11 +87,16 @@ export class LugaresService {
       xhr.send(formData);
 
     });
+  }
 
-    // const url = BASE_URL + `/upload/${tipo}/${id}`;
-    // const formData: FormData = new FormData();
-    // formData.append('imagen', fileItem, fileItem.name);
-    // return this.httpClient.put(url, formData);
+  deleteLugar(id: string) {
+    const url = BASE_URL + `/lugar/${id}`;
+
+    return this.httpClient.delete(url).pipe(map((resp: any) => {
+      // console.log('Respuesta del servidor: ', resp);
+      // console.log('Material borrado');
+      return resp;
+    }));
   }
 
 }

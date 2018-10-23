@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LugaresService } from '../../services/lugares.service';
-import { Lugares } from '../../models/lugares';
+import { Lugares, Lugar } from '../../models/lugares';
 
 @Component({
   selector: 'app-lugares-data',
@@ -49,8 +49,15 @@ export class LugaresDataComponent implements OnInit {
     console.log('Editar', lugar);
   }
 
-  onDelete(lugar) {
-    console.log('Eliminar', lugar);
+  onDelete(lugar: Lugar) {
+    // console.log('Eliminar', lugar);
+    this.lugarService.deleteLugar(lugar._id)
+      .subscribe((data: any) => {
+        console.log('Lugar eliminado correctamente');
+        this.getLugares();
+      }, err => {
+        console.log('Error al eliminar el lugar', err);
+      });
   }
 
 
