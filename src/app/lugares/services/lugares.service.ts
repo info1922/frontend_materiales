@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { Lugares, Lugar } from '../models/lugares';
+import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 
 
 
@@ -13,12 +14,31 @@ const BASE_URL = 'http://localhost:3000/api';
 })
 export class LugaresService {
 
+  style = 'material';
+  position: SnotifyPosition = SnotifyPosition.rightTop;
+  img = `assets/toast/save.svg`;
+
   public notificacion = new EventEmitter<any>();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private notify: SnotifyService) { }
 
   getLugares(): Observable<Lugares[]> {
     return this.httpClient.get<Lugares[]>(`${BASE_URL}/lugar`);
+  }
+
+
+  onSuccess(title: string, icono: string) {
+    this.notify.success(title, {
+      timeout: 3000,
+      showProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      position: this.position,
+      titleMaxLength: 40,
+      bodyMaxLength: 1000,
+      icon: icono
+    });
   }
 
   buscarLugares(termino: string) {
@@ -50,11 +70,13 @@ export class LugaresService {
       url += '/' + lugar._id;
       return this.httpClient.put(url, lugar).pipe(map((resp: any) => {
         console.log('Actualizado correctamente');
+        this.onSuccess('Lugar actualizado correctamente', 'assets/toast/refresh.svg');
         return resp;
       }));
     } else {
       // Creando
       return this.httpClient.post(url, lugar).pipe(map((resp: any) => {
+        this.onSuccess('Lugar guardado correctamente', 'assets/toast/save.svg');
         return resp;
       }));
     }
@@ -95,6 +117,16 @@ export class LugaresService {
     return this.httpClient.delete(url).pipe(map((resp: any) => {
       // console.log('Respuesta del servidor: ', resp);
       // console.log('Material borrado');
+      this.onSuccess('Lugar eliminado correctamente', 'assets/toast/trash.svg');
+      return resp;
+    }));
+  }
+
+  reporte() {
+    const url = BASE_URL + `/pdf/lugares`;
+
+    return this.httpClient.get(url).pipe(map((resp: any) => {
+      console.log('Respuesta pdf: ', resp);
       return resp;
     }));
   }
