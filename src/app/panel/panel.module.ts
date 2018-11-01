@@ -14,6 +14,10 @@ import { PipesModule } from '../pipes/pipes.module';
 import { UsuariosModule } from '../usuarios/usuarios.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from '../core/services/http-interceptor.service';
+// import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+
+import { CalendarioModule } from '../calendario/calendario.module';
+
 
 @NgModule({
   imports: [
@@ -24,14 +28,17 @@ import { HttpInterceptorService } from '../core/services/http-interceptor.servic
     PipesModule,
     UsuariosModule,
     LugaresModule,
+    CalendarioModule,
     MaterialesModule,
     ClrCheckboxNextModule,
     ClarityModule,
     ClrFormsNextModule,
   ],
+  exports: [],
   declarations: [PanelComponent, MainContentComponent, NavComponent, HeaderComponent],
   providers: [VerticalNavCases, {
-    provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorService, multi: true,
   }]
 })
 export class PanelModule { }

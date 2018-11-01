@@ -33,7 +33,7 @@ export class AuthComponent implements OnInit {
       this.title = 'Login';
       this.estilos = {
         'display': 'flex',
-        'background': 'url(/assets/fondo/Rainbow-Vortex.svg)',
+        'background': 'url(./assets/fondo/Rainbow-Vortex.svg)',
         'background-size': 'cover',
         'background-position': '21rem 0',
         'background-repeat': 'no-repeat',
@@ -42,7 +42,7 @@ export class AuthComponent implements OnInit {
       this.title = 'Signup';
       this.estilos = {
         'display': 'flex',
-        'background': 'url(/assets/fondo/Dragon-Scales.svg)',
+        'background': 'url(./assets/fondo/Dragon-Scales.svg)',
         'background-size': 'cover',
         'background-position': '21rem 0',
         'background-repeat': 'no-repeat',

@@ -8,6 +8,7 @@ import { UsuariosDataComponent } from '../usuarios/components/usuarios-data/usua
 import { LugarNewComponent } from '../lugares/components/lugar-new/lugar-new.component';
 import { MaterialNewComponent } from '../materiales/components/material-new/material-new.component';
 import { AuthGuardService } from '../core/services/auth-guard.service';
+import { CalendarComponent } from '../calendario/components/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosDataComponent,
+        canActivateChild: [AuthGuardService]
+      },
+      {
+        path: 'calendario',
+        component: CalendarComponent,
         canActivateChild: [AuthGuardService]
       },
       {

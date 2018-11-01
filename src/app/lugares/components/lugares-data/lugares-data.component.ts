@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LugaresService } from '../../services/lugares.service';
 import { Lugares, Lugar } from '../../models/lugares';
+import { JwtService } from '../../../core/services/jwt.service';
+import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 
 @Component({
   selector: 'app-lugares-data',
@@ -10,7 +12,14 @@ import { Lugares, Lugar } from '../../models/lugares';
 })
 export class LugaresDataComponent implements OnInit {
 
-  constructor( private router: Router, private lugarService: LugaresService) { }
+  constructor( private router: Router,
+    private lugarService: LugaresService,
+    private jwtService: JwtService,
+    private notify: SnotifyService) { }
+
+
+  style = 'material';
+  position: SnotifyPosition = SnotifyPosition.centerCenter;
 
   dataLugares: Lugares[] = [];
   cargando = true;
@@ -25,11 +34,17 @@ export class LugaresDataComponent implements OnInit {
   getLugares() {
     this.cargando = true;
     this.lugarService.getLugares().subscribe((data: any) => {
+      // console.log(data);
       this.dataLugares = data.lugarlist;
       this.cargando = false;
       // console.log(data.lugarlist);
-    }, err => {
-      console.log(err);
+    }, (err: any ) => {
+      // console.log('Error al obtener datos: ', err);
+
+      if (err.statusText === 'Unauthorized' && err.status === 401) {
+        this.jwtService.destroyToken();
+        this.router.navigate(['login']);
+      }
     });
   }
 
@@ -46,11 +61,29 @@ export class LugaresDataComponent implements OnInit {
   }
 
   onEdit(lugar) {
-    console.log('Editar', lugar);
+    // console.log('Editar', lugar);
+    this.router.navigate(['/panel/lugares', lugar._id]);
+  }
+
+  eliminacion(lugar: Lugar) {
+    // console.log('eliminar');
+    this.notify.confirm( '¿Esta seguro de eliminar este registro?', {
+      showProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      position: this.position,
+      titleMaxLength: 40,
+      bodyMaxLength: 1000,
+      buttons: [
+        {text: 'Si', action: (toast) => {this.onDelete(lugar); this.notify.remove(toast.id); }},
+        {text: 'No', action: (toast) => this.notify.remove(toast.id)}
+      ]
+    });
   }
 
   onDelete(lugar: Lugar) {
     // console.log('Eliminar', lugar);
+    // this.lugarService.onDelete(lugar._id);
     this.lugarService.deleteLugar(lugar._id)
       .subscribe((data: any) => {
         console.log('Lugar eliminado correctamente');
@@ -78,6 +111,13 @@ export class LugaresDataComponent implements OnInit {
         this.dataLugares = lugares;
         this.cargando = false;
       });
+  }
+
+  generaPDF() {
+    console.log('Generando pdf ...');
+    this.lugarService.reporte().subscribe((data: any) => {
+      console.log('Respuesta componente: ', data);
+    });
   }
 
 }

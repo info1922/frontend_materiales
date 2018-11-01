@@ -1,16 +1,21 @@
 <div class="row">
+    <ng-snotify class="{{style}}"></ng-snotify>
     <div class="col-lg-8 clr-offset-lg-2 col-md-8 clr-offset-md-2 col-sm-12 col-xs-12">
 
         <div class="card-entidad">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 title-entidad">Lugares</div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 title-entidad">Lugares</div>
+                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
 
-                        <button class="btn  btn-primary btn-icon" [routerLink]="['/panel/lugares', 'nuevo']" routerLinkActive="router-link-active">
+                        <button class="btn btn-primary btn-icon" [routerLink]="['/panel/lugares', 'nuevo']" routerLinkActive="router-link-active">
                             <clr-icon shape="plus" style="margin-right: 5px">
                             </clr-icon>Nuevo lugar
                         </button>
+                        <a href="http://localhost:3000/api/pdf/lugares" target="_blank" class="btn btn-primary btn-icon btnpdf">
+                            <clr-icon shape="file" style="margin-right: 5px">
+                            </clr-icon>Generar reporte
+                        </a>
                     </div>
                 </div>
 
@@ -36,8 +41,8 @@
                         <clr-dg-row *clrDgItems="let lugar of dataLugares" [clrDgItem]="lugar">
                             <clr-dg-action-overflow>
                                 <!-- <button class="action-item" (click)="onEdit(user)"></button> -->
-                                <button class="action-item" [routerLink]="['/panel/lugares', lugar._id]">Actualizar</button>
-                                <button class="action-item" (click)="onDelete(lugar)">Eliminar</button>
+                                <button class="action-item" (click)="onEdit(lugar)">Actualizar</button>
+                                <button class="action-item" (click)="eliminacion(lugar)">Eliminar</button>
                                 <button class="action-item" (click)="onDetail(lugar._id)">Más detalles</button>
                             </clr-dg-action-overflow>
                             <clr-dg-cell class="celda"><img [src]="lugar.img | imagen:'lugar'" class="img-rounded cursor"></clr-dg-cell>

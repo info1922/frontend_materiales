@@ -34,12 +34,18 @@
 
 
             <div class="header-actions">
-                <clr-dropdown>
+                <a class="nav-link nav-icon" [routerLink]="['/panel/calendario']" routerLinkActive="active">
+                    <clr-icon shape="calendar" class="is-solid"></clr-icon>
+                </a>
+                <!-- <clr-dropdown>
                     <button class="nav-icon" clrDropdownTrigger id="dropdown-with-icons">
                             <clr-icon shape="bell" class="has-badge is-solid "></clr-icon>
                     </button>
                     <clr-dropdown-menu clrPosition="bottom-right" class="dropdown-bell">
-                        <div clrDropdownItem> <b class="margin-right-0_25">Notificaciones</b> <span class="badge badge-danger">12</span></div>
+                        <div clrDropdownItem>
+                            <b class="margin-right-0_25">Notificaciones</b>
+                            <span class="badge badge-danger">12</span>
+                        </div>
                         <a href="javascript://" clrDropdownItem class="dropdown-item">
                             <clr-icon shape="trash" class="is-error"></clr-icon>
                             Se han eliminado algunos registros
@@ -52,7 +58,7 @@
                             Se actualizo un lugar</a>
                     </clr-dropdown-menu>
 
-                </clr-dropdown>
+                </clr-dropdown> -->
                 <clr-dropdown>
                     <button class="nav-icon" clrDropdownTrigger id="dropdown-with-icons">
                       <!-- <clr-icon shape="cog"></clr-icon>

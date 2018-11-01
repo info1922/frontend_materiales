@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {FormGroup, FormControl, Validators, NgForm} from '@angular/forms';
 import { LugaresService } from '../../services/lugares.service';
 import { Lugar, Lugares } from '../../models/lugares';
+import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 
 @Component({
   selector: 'app-lugar-new',
@@ -10,6 +11,10 @@ import { Lugar, Lugares } from '../../models/lugares';
   styleUrls: ['./lugar-new.component.css']
 })
 export class LugarNewComponent implements OnInit {
+
+  style = 'material';
+  position: SnotifyPosition = SnotifyPosition.rightTop;
+  title: string;
 
   exampleForm: FormGroup;
 
@@ -22,12 +27,14 @@ export class LugarNewComponent implements OnInit {
   standalone = true;
   cargando = false;
   cargandoImagen = false;
+  closed = true;
   //
 
   constructor(
     private router: Router,
     private lugaresService: LugaresService,
-    private activatedRouter: ActivatedRoute) {
+    private activatedRouter: ActivatedRoute,
+    private notify: SnotifyService) {
       activatedRouter.params.subscribe(params => {
         // Obtener el id del lugar URL
         const id = params['id'];
@@ -68,7 +75,7 @@ export class LugarNewComponent implements OnInit {
         console.log(data);
         // console.log('Id del lugar desde componente ', data.lugarlist._id);
         this.subirImagen(data.lugar._id);
-        console.log('Guardado correctamente');
+        // console.log('Guardado correctamente');
         this.cargando = false;
         this.router.navigate(['/panel/lugares', data.lugar._id]);
       }, err => {
@@ -79,7 +86,11 @@ export class LugarNewComponent implements OnInit {
   }
 
   returnLugares() {
+    // window.location.href = '/panel/lugares';
+    this.notify.clear();
     this.router.navigate(['panel', 'lugares']);
+
+    // this.onSuccess();
   }
 
   seleccionImage(archivo: File) {

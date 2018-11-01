@@ -8,8 +8,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LugaresService } from './services/lugares.service';
 import { PipesModule } from '../pipes/pipes.module';
 import { LugarService } from './services/lugar.service';
-import { HttpInterceptorService } from '../core/services/http-interceptor.service';
 import { RouterModule } from '@angular/router';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 
 @NgModule({
   imports: [
@@ -21,10 +21,12 @@ import { RouterModule } from '@angular/router';
     ClrCheckboxNextModule ,
     ClarityModule,
     ClrFormsNextModule,
-    PipesModule
+    PipesModule,
+    SnotifyModule
   ],
   declarations: [LugaresDataComponent, LugarNewComponent],
   exports: [LugaresDataComponent, RouterModule],
-  providers: [LugaresService, LugarService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}]
+  providers: [LugaresService, LugarService,SnotifyService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults}],
 })
 export class LugaresModule { }

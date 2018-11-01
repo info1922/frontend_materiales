@@ -11,10 +11,14 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { PipesModule } from './pipes/pipes.module';
 
+// import { CalendarComponent } from './calendario/components/calendar/calendar.component';
+// import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,8 @@ import { PipesModule } from './pipes/pipes.module';
     ReactiveFormsModule,
     AuthModule,
     CoreModule,
-    PipesModule
+    PipesModule,
+    // SnotifyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -78,6 +78,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  calendario() {
+    console.log('Calendario');
+    this.router.navigate(['/panel/calendario']);
+  }
+
 
 }
 
