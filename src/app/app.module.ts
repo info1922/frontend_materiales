@@ -13,6 +13,7 @@ import { PipesModule } from './pipes/pipes.module';
 
 // import { CalendarComponent } from './calendario/components/calendar/calendar.component';
 // import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import { ElectronService } from './services/electron.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { PipesModule } from './pipes/pipes.module';
     PipesModule,
     // SnotifyModule
   ],
-  providers: [],
+  providers: [ElectronService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

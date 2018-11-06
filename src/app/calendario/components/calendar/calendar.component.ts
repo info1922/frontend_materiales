@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { scheduleData } from './datasource';
 import { extend } from '@syncfusion/ej2-base';
-import { EventSettingsModel, View, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
+import {
+  EventSettingsModel,
+  View,
+  MonthAgendaService, DayService,
+  WeekService, WorkWeekService,
+  MonthService, AgendaService, TimelineViewsService, TimelineMonthService
+ } from '@syncfusion/ej2-angular-schedule';
 import { loadCldr, L10n} from '@syncfusion/ej2-base';
 declare var require: any;
 
@@ -14,7 +20,10 @@ loadCldr(
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService,
+  MonthAgendaService, TimelineViewsService, TimelineMonthService],
+  encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit {
 
@@ -24,7 +33,7 @@ export class CalendarComponent implements OnInit {
   public mes = this.fecha.getMonth();
   public dia = this.fecha.getDate();
   public selectedDate: Date = new Date(this.anio, this.mes, this.dia);
-  public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], scheduleData, null, true) };
+  public eventSettings: EventSettingsModel = { };
   public currentView: View = 'MonthAgenda';
 
   ngOnInit(): void {

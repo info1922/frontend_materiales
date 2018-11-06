@@ -17,7 +17,7 @@ export class LugaresDataComponent implements OnInit {
     private jwtService: JwtService,
     private notify: SnotifyService) { }
 
-
+  // tipo: string;
   style = 'material';
   position: SnotifyPosition = SnotifyPosition.centerCenter;
 
@@ -113,11 +113,10 @@ export class LugaresDataComponent implements OnInit {
       });
   }
 
-  generaPDF() {
-    console.log('Generando pdf ...');
-    this.lugarService.reporte().subscribe((data: any) => {
-      console.log('Respuesta componente: ', data);
-    });
+  generaPDF(tipo) {
+    console.log(tipo);
+    // console.log('Generando pdf ...');
+    this.lugarService.reporte();
   }
 
 }

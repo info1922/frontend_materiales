@@ -4,18 +4,38 @@ const url = require('url');
 
 // Mantén una referencia global del objeto window, si no lo haces, la ventana 
 // se cerrará automáticamente cuando el objeto JavaScript sea eliminado por el recolector de basura.
-let win;
+let win, server;
+var args = process.argv.slice(1);
+serve = args.some(function(val) { return val === '--serve'; });
 
 function createWindow() {
     // Crea la ventana del navegador.
-    win = new BrowserWindow({ width: 1200, height: 700 });
+    win = new BrowserWindow({
+        x: 80,
+        y: 80,
+        width: 1300,
+        height: 700,
+        frame: false
+    });
 
     // y carga el archivo index.html de la aplicación.
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'dist/materiales/index.html'),
-        protocol: false,
-        slashes: true
-    }));
+    if (serve) {
+        require('electron-reload')(__dirname, {
+            electron: require(__dirname + "/node_modules/electron")
+        });
+        win.loadURL('http://localhost:4200/login');
+    } else {
+        win.loadURL(url.format({
+            pathname: path.join(__dirname, 'dist/materiales/index.html'),
+            protocol: false,
+            slashes: true
+        }));
+    }
+    // win.loadURL(url.format({
+    //     pathname: path.join(__dirname, 'dist/materiales/index.html'),
+    //     protocol: false,
+    //     slashes: true
+    // }));
 
     // Abre las herramientas de desarrollo (DevTools).
     win.webContents.openDevTools();

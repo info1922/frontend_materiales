@@ -1,9 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, window} from 'rxjs/operators';
 import { Lugares, Lugar } from '../models/lugares';
 import { SnotifyService, SnotifyPosition } from 'ng-snotify';
+import { JwtService } from '../../core/services/jwt.service';
+
+import {saveAs} from 'file-saver';
 
 
 
@@ -21,6 +24,7 @@ export class LugaresService {
   public notificacion = new EventEmitter<any>();
 
   constructor(private httpClient: HttpClient,
+    private jwtService: JwtService,
     private notify: SnotifyService) { }
 
   getLugares(): Observable<Lugares[]> {
@@ -125,10 +129,30 @@ export class LugaresService {
   reporte() {
     const url = BASE_URL + `/pdf/lugares`;
 
-    return this.httpClient.get(url).pipe(map((resp: any) => {
-      console.log('Respuesta pdf: ', resp);
-      return resp;
-    }));
+    const headerConfig = {
+      'Content-Type' : 'application/json',
+      'Accept' : 'application/json',
+      'Authorization': `bearer ${this.jwtService.getToken}`
+    };
+    // tslint:disable-next-line:no-debugger
+
+    const token = this.jwtService.getToken();
+
+    if (token) {
+      headerConfig['Authorization'] = `bearer ${token}`;
+    }
+
+    return this.httpClient.get(url, {responseType: 'blob'}).pipe(map((res) => {
+      // console.log('Blob', res);
+      const obj: any = res;
+      // console.log('obj: ', obj);
+      return new Blob([obj], {type: 'application/pdf'});
+    })).subscribe(blob => {
+      // console.log('Blob', blob);
+      saveAs(blob, 'lugaressss.pdf');
+    }, error => {
+      console.log(error, 'pdfff');
+    });
   }
 
 }

@@ -12,10 +12,10 @@
                             <clr-icon shape="plus" style="margin-right: 5px">
                             </clr-icon>Nuevo lugar
                         </button>
-                        <a href="http://localhost:3000/api/pdf/lugares" target="_blank" class="btn btn-primary btn-icon btnpdf">
+                        <button (click)="generaPDF('lugares')" class="btn btn-primary btn-icon btnpdf" *ngIf="dataLugares.length > 0">
                             <clr-icon shape="file" style="margin-right: 5px">
                             </clr-icon>Generar reporte
-                        </a>
+                        </button>
                     </div>
                 </div>
 
