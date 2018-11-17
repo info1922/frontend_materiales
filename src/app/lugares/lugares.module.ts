@@ -26,7 +26,7 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
   ],
   declarations: [LugaresDataComponent, LugarNewComponent],
   exports: [LugaresDataComponent, RouterModule],
-  providers: [LugaresService, LugarService,SnotifyService,
+  providers: [LugaresService, LugarService, SnotifyService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults}],
 })
 export class LugaresModule { }

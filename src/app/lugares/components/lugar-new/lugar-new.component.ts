@@ -48,8 +48,12 @@ export class LugarNewComponent implements OnInit {
     this.crearFormulario();
     this.cargandoImagen = false;
     this.lugaresService.notificacion.subscribe(resp => {
+      this.cargandoImagen = false;
       console.log('Respuesta notificacion: ', resp);
-      this.cargandoImagen = true;
+      setTimeout(function() {
+        this.cargandoImagen = true;
+      }, 2000);
+      // this.cargandoImagen = true;
     });
     this.sub = null;
   }
@@ -73,9 +77,7 @@ export class LugarNewComponent implements OnInit {
     this.lugaresService.crearLugar(this.lugar)
       .subscribe((data: any) => {
         console.log(data);
-        // console.log('Id del lugar desde componente ', data.lugarlist._id);
         this.subirImagen(data.lugar._id);
-        // console.log('Guardado correctamente');
         this.cargando = false;
         this.router.navigate(['/panel/lugares', data.lugar._id]);
       }, err => {

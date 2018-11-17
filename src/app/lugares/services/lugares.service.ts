@@ -66,10 +66,10 @@ export class LugaresService {
 
   crearLugar(lugar: Lugar) {
     let url = BASE_URL + '/lugar';
-
+    // console.log('I'lugar._id);
     // Actualiza o agrega
     if (lugar._id) {
-      console.log('Id del lugar: ', lugar._id);
+      // console.log('Id del lugar: ', lugar._id);
       // Actualizar
       url += '/' + lugar._id;
       return this.httpClient.put(url, lugar).pipe(map((resp: any) => {
@@ -122,6 +122,7 @@ export class LugaresService {
       // console.log('Respuesta del servidor: ', resp);
       // console.log('Material borrado');
       this.onSuccess('Lugar eliminado correctamente', 'assets/toast/trash.svg');
+      this.notify.clear();
       return resp;
     }));
   }

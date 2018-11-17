@@ -86,11 +86,12 @@ export class LugaresDataComponent implements OnInit {
     // this.lugarService.onDelete(lugar._id);
     this.lugarService.deleteLugar(lugar._id)
       .subscribe((data: any) => {
-        console.log('Lugar eliminado correctamente');
+        // console.log('Lugar eliminado correctamente');
         this.getLugares();
       }, err => {
         console.log('Error al eliminar el lugar', err);
       });
+      this.notify.clear();
   }
 
 

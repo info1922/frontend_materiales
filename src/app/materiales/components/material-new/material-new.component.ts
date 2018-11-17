@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import {FormGroup, FormControl, Validators, NgForm, NgSelectOption} from '@angular/forms';
+import { Materiales, Material } from '../../models/materiales';
+import { MaterialesService } from '../../services/materiales.service';
+import { Lugar } from 'src/app/lugares/models/lugares';
+import { LugaresService } from '../../../lugares/services/lugares.service';
 
 @Component({
   selector: 'app-material-new',
@@ -9,30 +13,121 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 })
 export class MaterialNewComponent implements OnInit {
 
-
+  imagenSubir: File;
   materialForm: FormGroup;
   sub = null;
+  lugares: Lugar[] = [];
+  material: Material = new Material( '', 1);
+  lugar: Lugar = new Lugar('');
+  asignar = false;
+  cargando = false;
+  imagenTem: any;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private materialService: MaterialesService,
+    private lugarService: LugaresService,
+    private routerParams: ActivatedRoute
+    ) {
+
+      routerParams.params.subscribe(params => {
+        // Obtener el id del material
+        const id  = params['id'];
+        if (id !== 'nuevo') {
+          this.crearMaterial(id);
+        }
+      });
+    }
 
   ngOnInit() {
     this.crearFormulario();
     this.sub = null;
+
+    this.lugarService.getLugares()
+      .subscribe((lugares: any) => {
+        return this.lugares = lugares.lugarlist;
+      });
   }
+
+  crearFormulario() {
+    this.materialForm = new FormGroup({
+      title: new FormControl('', Validators.required),
+      cantidad: new FormControl(1, Validators.required)
+    });
+  }
+
+  registrarMaterial(f: NgForm) {
+
+    if (f.invalid) {
+      return;
+    }
+    this.cargando = true;
+    // console.log('Valor del formulario: ', this.exampleForm.value);
+    this.sub = null || '';
+    // console.log('Datos del formulario:', this.lugar);
+    this.materialService.crearMaterial(this.material)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.subirImagen(data.matActual2._id);
+        this.cargando = false;
+        this.router.navigate(['/panel/materiales', data.matActual2._id]);
+      }, err => {
+        console.log('Error al enviar datos', err);
+      });
+      this.imagenTem = null;
+      this.materialForm.reset();
+  }
+
+  cambioLugar(id: string) {
+    this.lugarService.buscarLugar(id)
+      .subscribe( lugar => this.lugar = lugar);
+  }
+
 
   returnMateriales() {
     this.router.navigate(['panel', 'materiales']);
   }
 
-  crearFormulario() {
-    this.materialForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      cantidad: new FormControl('', Validators.required)
-    });
+  seleccionImage(archivo: File) {
+    if (!archivo) {
+      this.imagenSubir = null;
+      return;
+    }
+
+    if (archivo.type.indexOf('image') < 0) {
+      this.imagenSubir = null;
+      return;
+    }
+
+    this.imagenSubir = archivo;
+    const reader = new FileReader();
+    const urlImagenTemp = reader.readAsDataURL(archivo);
+
+    reader.onload = () => this.imagenTem = reader.result;
   }
 
-  seleccionImage(event) {
-    console.log(event);
+  subirImagen(id: string) {
+    if (this.imagenSubir) {
+      // this.lugaresService.subirArchivo(this.imagenSubir, 'lugares', id)
+      //   .subscribe((data: any) => {
+      //     console.log('Imagen subida', data);
+      //   });
+    this.materialService.subirArchivo(this.imagenSubir, 'materiales', id)
+      .then((resp: any) => {
+        console.log('Imagen subida correctamente', resp);
+        this.material.img = resp.materialActualizado.img;
+      })
+      .catch(err => {
+        console.log('Error al cargar la imagen');
+      });
+    }
+  }
+
+  crearMaterial(id: string) {
+    this.materialService.buscarMaterial(id).subscribe((material: Material) => {
+      console.log(material);
+      this.material = material;
+    });
   }
 
 }

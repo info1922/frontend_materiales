@@ -47,7 +47,7 @@ const routes: Routes = [
         canActivateChild: [AuthGuardService]
       },
       {
-        path: 'materiales/nuevo',
+        path: 'materiales/:id',
         component: MaterialNewComponent,
         canActivateChild: [AuthGuardService]
       },

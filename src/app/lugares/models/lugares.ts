@@ -1,5 +1,5 @@
 export class Lugares {
-    _id: number;
+    _id: string;
     nombre: string;
     direccion: string;
     img: string;

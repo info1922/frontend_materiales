@@ -1,4 +1,5 @@
 <div class="row">
+    <ng-snotify class="{{style}}"></ng-snotify>
     <div class="col-lg-8 clr-offset-lg-2 col-md-8 clr-offset-md-2 col-sm-12 col-xs-12">
 
         <div class="card-entidad">
@@ -7,7 +8,7 @@
                     <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 title-entidad">Materiales</div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 
-                        <button class="btn  btn-primary btn-icon" (click)="newMaterial()">
+                        <button class="btn btn-primary btn-icon" [routerLink]="['/panel/materiales', 'nuevo']" routerLinkActive="router-link-active">
                         <clr-icon shape="plus" style="margin-right: 5px">
                         </clr-icon>Nuevo material
                       </button>
@@ -18,32 +19,34 @@
             <div class="card-block">
 
                 <clr-icon shape="search" size="24" class="buscar-input-ico"></clr-icon>
-                <input type="text" class="buscar-input" placeholder="Buscar material">
-                <!-- <div class="spin text-center">
+                <!-- <input #input (keyup)="buscarLugar(input.value)" type="text" class="buscar-input" placeholder="Buscar material"> -->
+                <div class="spin text-center" *ngIf="cargando">
                     <span class="spinner spinner-md">
                     </span> <br> <br> Cargando datos ...
-                </div> -->
+                </div>
 
                 <div class="card-title" style="overflow-y: 0">
 
                     <clr-datagrid style="width: 99.99%; height: auto">
                         <clr-dg-column>Imagen</clr-dg-column>
                         <clr-dg-column>Nombre</clr-dg-column>
-                        <clr-dg-column>Dirección</clr-dg-column>
-                        <clr-dg-column>No. de materiales</clr-dg-column>
+                        <clr-dg-column>Estado</clr-dg-column>
+                        <clr-dg-column>Cantidad </clr-dg-column>
                         <clr-dg-column>Ultima modificación</clr-dg-column>
-                        <clr-dg-placeholder>No se encontraron lugares</clr-dg-placeholder>
-                        <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+                        <clr-dg-placeholder>No se encontraron materiales</clr-dg-placeholder>
+                        <clr-dg-row *clrDgItems="let material of dataMateriales" [clrDgItem]="material">
                             <clr-dg-action-overflow>
-                                <!-- <button class="action-item" (click)="onEdit(user)"></button> -->
-                                <button class="action-item" (click)="onEdit(user)">Actualizar</button>
-                                <button class="action-item" (click)="onDelete(user)">Eliminar</button>
+                                <button class="action-item" (click)="onEdit(material)">Actualizar</button>
+                                <button class="action-item" (click)="eliminacion(material)">Eliminar</button>
+                                <!-- <button class="action-item" (click)="onDetail(lugar._id)">Más detalles</button> -->
                             </clr-dg-action-overflow>
-                            <clr-dg-cell class="celda"><img src="assets/placeholder_60x60.png" class="img-rounded cursor"></clr-dg-cell>
-                            <clr-dg-cell class="celda"> {{user.id}}</clr-dg-cell>
-                            <clr-dg-cell>{{user.name}}</clr-dg-cell>
-                            <clr-dg-cell>{{user.creation}}</clr-dg-cell>
-                            <clr-dg-cell>{{user.color}}</clr-dg-cell>
+                            <clr-dg-cell class="celda"><img [src]="material.img | imagen:'material'" class="img-rounded cursor"></clr-dg-cell>
+                            <clr-dg-cell>{{material.title}}</clr-dg-cell>
+                            <clr-dg-cell *ngIf="!material.asignado">Sin asignar</clr-dg-cell>
+                            <clr-dg-cell *ngIf="material.asignado">{{material.lugar.nombre}}</clr-dg-cell>
+                            <clr-dg-cell>{{(material.cantidad)}}</clr-dg-cell>
+                            <!-- <clr-dg-cell>{{(material.lugar)}}</clr-dg-cell> -->
+                            <clr-dg-cell>{{material.updatedAt | date}}</clr-dg-cell>
                         </clr-dg-row>
 
                         <!-- <clr-dg-footer>{{users.length}} users</clr-dg-footer> -->

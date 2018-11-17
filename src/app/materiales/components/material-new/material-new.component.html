@@ -27,40 +27,76 @@
                 <div class="card-title" style="overflow-y: 0">
 
                     <!-- Formulario del nuevo lugar -->
-                    <form class="clr-form" [formGroup]="materialForm" #f="ngForm">
+                    <form class="clr-form" #f="ngForm" (ngSubmit)="registrarMaterial(f)">
 
                         <clr-input-container>
 
-                            <input clrInput type="text" formControlName="name" placeholder="Nombre" />
+                            <input clrInput type="text" [(ngModel)]="material.title" name="title" placeholder="Nombre" />
                             <clr-control-helper><strong>Escribe un nombre del material.</strong> </clr-control-helper>
                             <clr-control-error><strong>El nombre del material es necesario, por favor escribe un nombre.</strong></clr-control-error>
                         </clr-input-container>
 
                         <clr-input-container>
 
-                            <input clrInput type="text" formControlName="cantidad" placeholder="Dirección" />
+                            <input clrInput type="number" min="1" [(ngModel)]="material.cantidad" name="cantidad" placeholder="Cantidad" />
                             <clr-control-helper><strong>Cantidad de materiales.</strong> </clr-control-helper>
                             <clr-control-error><strong>La cantidad es necesaria, por favor escribe una cantidad.</strong></clr-control-error>
 
                         </clr-input-container>
 
+                        <!-- <clr-checkbox-container style="margin-top:20px">
 
-                        <div class="clr-form-control clr-row">
-                            <div class="clr-control-container clr-col-xs-12 clr-col-md-12">
-                                <div class="clr-input-wrapper">
-                                    <input type="file" id="example" placeholder="Example Input" class="btn btn-outline boton" (change)="seleccionImage($event)" [(ngModel)]="this.sub" [ngModelOptions]="{standalone: true}">
-                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                            <input clrCheckbox type="checkbox" [(ngModel)]="asignar" [ngModelOptions]="{standalone: true}">
+
+                            <label>Asignar material</label>
+
+                        </clr-checkbox-container> -->
+
+
+                        <div class="clr-form-control" *ngIf="lugares.length > 0">
+                            <!-- <label for="select-full" class="clr-control-label">Selecciona un lugar</label> -->
+                            <div class="clr-control-container">
+                                <!-- <clr-control-helper>Asignar material a un lugar</clr-control-helper> -->
+                                <div class="clr-select-wrapper">
+
+                                    <select class="clr-select" (change)="cambioLugar($event.target.value)" [(ngModel)]="material.lugar" name="lugar">
+                                      <option *ngFor="let lugar of lugares" [value]="lugar._id">{{lugar.nombre}}</option>
+                                    </select>
+                                    <!-- <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon> -->
                                 </div>
-                                <clr-control-helper class="he"> <strong>Elije una imagen para este material.</strong> </clr-control-helper>
+                                <clr-control-helper><strong> Selecciona un lugar</strong></clr-control-helper>
                             </div>
-
-                            <img src="assets/img/no-imagen.png" class="imagen">
-                            <br>
 
                         </div>
 
 
-                        <button class="btn btn-primary btn-icon"><clr-icon shape="floppy"  style="margin-right: 5px"></clr-icon>Guardar</button>
+                        <div class="clr-form-control clr-row">
+                            <div class="clr-control-container clr-col-xs-12 clr-col-md-12">
+                                <div class="clr-input-wrapper">
+                                    <input type="file" id="example" placeholder="Example Input" class="btn btn-outline boton" (change)="seleccionImage($event.target.files[0])" [(ngModel)]="this.sub" [ngModelOptions]="{standalone: true}">
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+                                <clr-control-helper class="he"> <strong>Elije una imagen para este material.</strong> </clr-control-helper>
+                            </div>
+                            <div *ngIf="!material._id">
+                                <img *ngIf="!imagenTem" [src]="'imagen' | imagen" class="imagen">
+                                <img *ngIf="imagenTem" [src]="imagenTem" class="imagen">
+                            </div>
+
+                            <br>
+                            <div *ngIf="material._id">
+                                <div class="spin text-center" *ngIf="cargandoImagen">
+                                    <span class="spinner spinner-md">
+                                        </span> <br> <br> Cargando imagen ...
+                                </div>
+                                <img *ngIf="!imagenTem" [src]="material.img | imagen: 'material'" class="imagen">
+                                <img *ngIf="imagenTem" [src]="imagenTem" class="imagen">
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary btn-icon"><clr-icon shape="floppy"  style="margin-right: 5px"></clr-icon>Guardar</button>
                         <button class="btn btn-danger btn-icon"><clr-icon shape="times"  style="margin-right: 5px"></clr-icon>Cancelar</button>
 
 
