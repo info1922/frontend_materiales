@@ -12,7 +12,7 @@ import { CoreModule } from './core/core.module';
 import { PipesModule } from './pipes/pipes.module';
 
 // import { CalendarComponent } from './calendario/components/calendar/calendar.component';
-// import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import { ElectronService } from './services/electron.service';
 
 
@@ -33,9 +33,10 @@ import { ElectronService } from './services/electron.service';
     AuthModule,
     CoreModule,
     PipesModule,
-    // SnotifyModule
+    SnotifyModule
   ],
-  providers: [ElectronService],
+  providers: [ElectronService, SnotifyService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

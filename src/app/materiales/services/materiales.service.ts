@@ -97,4 +97,20 @@ export class MaterialesService {
         return resp.material;
       }));
     }
+
+    buscarMateriales(termino: string) {
+      const url = BASE_URL + '/buscar/materiales/' + termino;
+      return this.httpClient.get(url).pipe(map((resp: any) => {
+        // console.log(resp.lugares);
+        return resp.materiales;
+      }));
+    }
+
+    bienvenida() {
+      const url = BASE_URL + '/material/bienvenido';
+      return this.httpClient.get(url).pipe(map((resp: any) => {
+        console.log(resp);
+        return resp;
+      }));
+    }
 }

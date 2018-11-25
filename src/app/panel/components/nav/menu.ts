@@ -12,14 +12,14 @@ export class VerticalNavCases {
                     {label: 'Panel pricipal', url: ''}
                 ]
             },
-            {
-                label: 'Usuarios',
-                icon: 'users',
-                submenu: [
-                    {label: 'Usuarios', url: 'usuarios'},
-                    // {label: 'Nuevo usuario', url: 'nuevo-usuario'}
-                ]
-            },
+            // {
+            //     label: 'Usuarios',
+            //     icon: 'users',
+            //     submenu: [
+            //         {label: 'Usuarios', url: 'usuarios'},
+            //         // {label: 'Nuevo usuario', url: 'nuevo-usuario'}
+            //     ]
+            // },
             {
                 label: 'Lugares',
                 icon: 'map-marker',

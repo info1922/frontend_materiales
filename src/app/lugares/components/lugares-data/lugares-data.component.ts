@@ -19,12 +19,16 @@ export class LugaresDataComponent implements OnInit {
 
   // tipo: string;
   style = 'material';
+  nombre: string;
+  imagen: string;
   position: SnotifyPosition = SnotifyPosition.centerCenter;
 
   dataLugares: Lugares[] = [];
+  public lugar: Lugar[] = [];
   cargando = true;
   public basic = false;
   datoLugar;
+  opened = false;
   // datoLugar: Array<[]>;
 
   ngOnInit() {
@@ -118,6 +122,17 @@ export class LugaresDataComponent implements OnInit {
     console.log(tipo);
     // console.log('Generando pdf ...');
     this.lugarService.reporte();
+  }
+
+  mostrarModal(id: string) {
+    // console.log(id);
+    this.opened = true;
+
+    this.lugarService.buscarLugar(id).subscribe((data: Lugar) => {
+      this.nombre = data.nombre;
+      this.imagen = data.img;
+      // console.log(this.material);
+    });
   }
 
 }

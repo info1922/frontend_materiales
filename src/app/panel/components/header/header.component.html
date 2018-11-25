@@ -18,7 +18,7 @@
                 </main>
             </div>
         </clr-main-container> -->
-        <header class="header header-1">
+        <header class="header header-3">
             <div class="branding">
                 <a href="#">
                     <clr-icon shape="list" class="logo"></clr-icon>
@@ -26,11 +26,11 @@
                 </a>
             </div>
 
-            <form action="" class="search">
+            <!-- <form action="" class="search">
                 <label for="search_input" class="sear-nav">
                         <input id="search_input" type="text" placeholder="Busqueda general">
                 </label>
-            </form>
+            </form> -->
 
 
             <div class="header-actions">
@@ -63,7 +63,7 @@
                     <button class="nav-icon" clrDropdownTrigger id="dropdown-with-icons">
                       <!-- <clr-icon shape="cog"></clr-icon>
                       <clr-icon shape="caret down"></clr-icon> -->
-                      <img src="assets/project.png" alt="" class="avatar">
+                      <img src="assets/user.png" alt="" class="avatar">
                     </button>
                     <clr-dropdown-menu clrPosition="bottom-right">
                         <a clrDropdownItem>
@@ -79,10 +79,10 @@
                             </div>
 
                         </a>
-                        <a href="javascript://" clrDropdownItem>
+                        <a href="javascript://" clrDropdownItem (click)="mostrarModal()">
                             <clr-icon shape="help-info" class="ico"></clr-icon> About</a>
-                        <a href="javascript://" clrDropdownItem>
-                            <clr-icon shape="cog"></clr-icon> Perfil de usuario</a>
+                        <!-- <a href="javascript://" clrDropdownItem>
+                            <clr-icon shape="cog"></clr-icon> Perfil de usuario</a> -->
                         <a href="javascript://" clrDropdownItem (click)="logout()">
                             <clr-icon shape="logout"></clr-icon> Cerrar sesión</a>
                     </clr-dropdown-menu>
@@ -92,3 +92,21 @@
     </div>
 
 </div>
+
+<!-- Modal -->
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">Sistema administrado de materiales</h3>
+    <div class="modal-body text-center">
+        <img src="assets/ripple.png" class="img-rounded">
+
+        <p>Sistema desarrollado para el municipio de San Miguel Suchixtepec, Miahuatlán, Oaxaca.</p>
+        <p>Desarrollado por Iván García Velasco</p>
+        <p>Correo electrónico: ivann1922@gmail.com</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="opened = false">
+            Salir
+        </button>
+    </div>
+</clr-modal>

@@ -31,7 +31,7 @@
 
                 <div class="card-title" style="overflow-y: 0">
 
-                    <clr-datagrid style="width: 99.99%; height: auto">
+                    <clr-datagrid style="height: auto" class="datagrid-compact">
                         <clr-dg-column>Imagen</clr-dg-column>
                         <clr-dg-column>Nombre</clr-dg-column>
                         <clr-dg-column>Dirección</clr-dg-column>
@@ -41,11 +41,12 @@
                         <clr-dg-row *clrDgItems="let lugar of dataLugares" [clrDgItem]="lugar">
                             <clr-dg-action-overflow>
                                 <!-- <button class="action-item" (click)="onEdit(user)"></button> -->
-                                <button class="action-item" (click)="onEdit(lugar)">Actualizar</button>
-                                <button class="action-item" (click)="eliminacion(lugar)">Eliminar</button>
-                                <button class="action-item" (click)="onDetail(lugar._id)">Más detalles</button>
+                                <button class="action-item" (click)="onEdit(lugar)"><clr-icon shape="pencil" class="is-solid"></clr-icon> Actualizar</button>
+                                <button class="action-item" (click)="onDetail(lugar._id)"><clr-icon shape="info-standard" class="is-solid"></clr-icon> Más detalles</button>
+                                <hr>
+                                <button class="action-item" (click)="eliminacion(lugar)"><clr-icon shape="trash" class="is-solid is-error"></clr-icon> Eliminar</button>
                             </clr-dg-action-overflow>
-                            <clr-dg-cell class="celda"><img [src]="lugar.img | imagen:'lugar'" class="img-rounded cursor"></clr-dg-cell>
+                            <clr-dg-cell class="celda"><img [src]="lugar.img | imagen:'lugar'" class="img-rounded cursor" (click)="mostrarModal(lugar._id)"></clr-dg-cell>
                             <!-- <clr-dg-cell class="celda"> {{lugar.id}}</clr-dg-cell> -->
                             <clr-dg-cell>{{lugar.nombre}}</clr-dg-cell>
                             <clr-dg-cell *ngIf="!lugar.direccion">Sin dirección</clr-dg-cell>
@@ -67,6 +68,20 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal muestra imagen -->
+<clr-modal [(clrModalOpen)]="opened" [clrModalStaticBackdrop]="true">
+    <h3 class="modal-title">{{this.nombre}}</h3>
+    <div class="modal-body text-center">
+        <img [src]="this.imagen | imagen:'lugar'" class="img-resumen">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="opened = false">
+            Salir
+        </button>
+    </div>
+</clr-modal>
 
 <!-- Modal mas información -->
 <clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'lg'" *ngFor="let lcg of datoLugar">
@@ -103,16 +118,19 @@
             </div>
         </div>
         <br>
-        <p class="p4">Materiales asignados a este lugar</p>
+        <h4 class="modal-title">Materiales asignados a este lugar</h4>
+        <!-- <p class="p4">Materiales asignados a este lugar</p> -->
 
-        <clr-datagrid style="width: 99.99%; height: auto">
+        <clr-datagrid style="height: auto" class="datagrid-compact">
             <clr-dg-column>Nombre</clr-dg-column>
+            <clr-dg-column>Imagen</clr-dg-column>
             <clr-dg-column>Cantidad</clr-dg-column>
             <clr-dg-column>Fecha de creación</clr-dg-column>
             <clr-dg-column>Ultima modificación</clr-dg-column>
             <clr-dg-placeholder>Este lugar aun no cuenta con materiales asignados</clr-dg-placeholder>
             <clr-dg-row *clrDgItems="let mt of lcg.materiales" [clrDgItem]="mt">
                 <clr-dg-cell>{{mt.title}}</clr-dg-cell>
+                <clr-dg-cell><img [src]="mt.img | imagen:'material'" class="img-rounded"></clr-dg-cell>
                 <clr-dg-cell>{{mt.cantidad}}</clr-dg-cell>
                 <clr-dg-cell>{{mt.createdAt | date}}</clr-dg-cell>
                 <clr-dg-cell>{{mt.updatedAt | date}}</clr-dg-cell>

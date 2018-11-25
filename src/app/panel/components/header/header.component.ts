@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   test: boolean;
 
   ajuste;
+  opened: boolean;
 
   themes = [
     {name : 'Dark', href: 'assets/css/clarity-ui-dark.min.css', value: false },
@@ -83,6 +84,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/panel/calendario']);
   }
 
+  mostrarModal() {
+    this.opened = true;
+    // console.log('Modal');
+  }
 
 }
 

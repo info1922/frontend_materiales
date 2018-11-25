@@ -7,7 +7,6 @@ import { LugarNewComponent } from './components/lugar-new/lugar-new.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LugaresService } from './services/lugares.service';
 import { PipesModule } from '../pipes/pipes.module';
-import { LugarService } from './services/lugar.service';
 import { RouterModule } from '@angular/router';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 
@@ -26,7 +25,7 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
   ],
   declarations: [LugaresDataComponent, LugarNewComponent],
   exports: [LugaresDataComponent, RouterModule],
-  providers: [LugaresService, LugarService, SnotifyService,
+  providers: [LugaresService, SnotifyService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults}],
 })
 export class LugaresModule { }

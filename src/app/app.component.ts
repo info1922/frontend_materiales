@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ElectronService } from './services/electron.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ElectronService } from './services/electron.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'app';
 
   constructor (public electronService: ElectronService) {
@@ -17,6 +17,7 @@ export class AppComponent {
     } else {
       console.log('Mode web');
     }
+    // this.bienvenida();
   }
 
   minimizeWindow() {
@@ -28,4 +29,13 @@ export class AppComponent {
     console.log('Close window');
     this.electronService.window.close();
   }
+
+ ngOnInit() {
+  // console.log('Hola');
+}
+
+ngAfterViewInit() {
+  console.log('Objetos');
+  // this.bienvenida();
+}
 }

@@ -21,11 +21,14 @@ export class MaterialesDataComponent implements OnInit {
     ) { }
 
     cargando = true;
-
+    opened = false;
+    titulo: string;
+    imagen: string;
     style = 'material';
     position: SnotifyPosition = SnotifyPosition.centerCenter;
 
     dataMateriales: Materiales[] = [];
+    public material: Material[];
     public basic = false;
     datoMaterial;
 
@@ -85,6 +88,32 @@ export class MaterialesDataComponent implements OnInit {
 
   newMaterial() {
     this.router.navigate(['panel', 'materiales', 'nuevo']);
+  }
+
+  buscarMaterial(termino: string) {
+
+    if (termino.length === 0) {
+      this.getMateriales();
+      return;
+    }
+
+    this.cargando = true;
+    this.materialService.buscarMateriales(termino)
+      .subscribe((materiales: Materiales[]) => {
+        this.dataMateriales = materiales;
+        this.cargando = false;
+      });
+  }
+
+  mostrarModal(id: string) {
+    // console.log(id);
+    this.opened = true;
+
+    this.materialService.buscarMaterial(id).subscribe((data: Material) => {
+      this.titulo = data.title;
+      this.imagen = data.img;
+      // console.log(this.material);
+    });
   }
 
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { NoAuthGuardService } from './core/services/no-auth-guard.service';
+import { AuthGuardService } from './core/services/auth-guard.service';
 
 const routes: Routes = [{
     path: 'login',
@@ -13,7 +14,8 @@ const routes: Routes = [{
     canActivate: [NoAuthGuardService]
 }, {
     path: 'panel',
-    loadChildren: '../app/panel/panel.module#PanelModule'
+    loadChildren: '../app/panel/panel.module#PanelModule',
+    canActivate: [AuthGuardService]
 }, {
     path: '**',
     redirectTo: 'panel'

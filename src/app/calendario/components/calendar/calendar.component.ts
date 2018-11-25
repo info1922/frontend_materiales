@@ -33,7 +33,7 @@ export class CalendarComponent implements OnInit {
   public mes = this.fecha.getMonth();
   public dia = this.fecha.getDate();
   public selectedDate: Date = new Date(this.anio, this.mes, this.dia);
-  public eventSettings: EventSettingsModel = { };
+  public eventSettings: EventSettingsModel = {dataSource:  <Object[]>extend([], scheduleData, null, true)};
   public currentView: View = 'MonthAgenda';
 
   ngOnInit(): void {
@@ -47,6 +47,7 @@ export class CalendarComponent implements OnInit {
 
   hola() {
     console.log('Hola');
+    console.log(this.eventSettings);
   }
 
 }
