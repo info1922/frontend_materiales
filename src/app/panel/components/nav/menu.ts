@@ -9,7 +9,7 @@ export class VerticalNavCases {
                 label: 'Principal',
                 icon: 'home',
                 submenu: [
-                    {label: 'Panel pricipal', url: ''}
+                    {label: 'Panel pricipal', url: 'panel'}
                 ]
             },
             // {
@@ -25,7 +25,7 @@ export class VerticalNavCases {
                 icon: 'map-marker',
                 submenu: [
                     {label: 'Lugares', url: 'lugares'},
-                    {label: 'Nuevo lugar', url: 'lugares/nuevo'}
+                    // {label: 'Nuevo lugar', url: 'lugares/nuevo'}
                 ]
             },
             {
@@ -33,7 +33,7 @@ export class VerticalNavCases {
                 icon: 'wrench',
                 submenu: [
                     {label: 'Materiales', url: 'materiales'},
-                    {label: 'Nuevo material', url: 'materiales/nuevo'}
+                    // {label: 'Nuevo material', url: 'materiales/nuevo'}
                 ]
             }
         ]

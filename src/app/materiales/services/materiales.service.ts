@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtService } from '../../core/services/jwt.service';
 import { SnotifyService, SnotifyPosition } from 'ng-snotify';
@@ -17,6 +17,7 @@ export class MaterialesService {
   style = 'material';
   position: SnotifyPosition = SnotifyPosition.rightTop;
   img = `assets/toast/save.svg`;
+  public notificacion = new EventEmitter<any>();
 
   constructor(public httpClient: HttpClient,
     public jwtService: JwtService,
@@ -26,24 +27,39 @@ export class MaterialesService {
       return this.httpClient.get<Materiales[]>(`${BASE_URL}/material`);
     }
 
+    onSuccess(title: string, icono: string) {
+      this.notify.success(title, {
+        timeout: 2000,
+        showProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        position: this.position,
+        titleMaxLength: 40,
+        bodyMaxLength: 1000,
+        icon: icono
+      });
+    }
+
 
     crearMaterial(material: Material) {
       let url = BASE_URL + '/material';
 
       // Actualizar o agregar
-      console.log('Id del material: ', material._id);
+      // console.log('Id del material: ', material._id);
       if (material._id) {
         // console.log('id del lugar: ', material._id);
         // Actualizar
         url += '/' + material._id;
         return this.httpClient.put(url, material).pipe(map((resp: any) => {
-          console.log('Material actualizado correctamente');
+          console.log('Actualizado correctamente');
+          // this.onSuccess('Material actualizado correctamente', 'assets/toast/refresh.svg');
           return resp;
         }));
       } else {
         // Creando
         return this.httpClient.post(url, material).pipe(map((resp: any) => {
-          console.log('Material creado correctamente');
+          console.log('Guardado correctamente');
+          // this.onSuccess('Material guardado correctamente', 'assets/toast/save.svg');
           return resp;
         }));
       }
@@ -71,7 +87,7 @@ export class MaterialesService {
         };
 
         const url = BASE_URL + `/upload/${tipo}/${id}`;
-        console.log(url);
+        // console.log(url);
         xhr.open('PUT', url, true);
         xhr.send(formData);
 
@@ -85,6 +101,7 @@ export class MaterialesService {
         // console.log('Respuesta del servidor: ', resp);
         // console.log('Material borrado');
         // this.onSuccess('Lugar eliminado correctamente', 'assets/toast/trash.svg');
+        // this.onSuccess('Material eliminado correctamente', 'assets/toast/trash.svg');
         return resp;
       }));
     }
@@ -112,5 +129,33 @@ export class MaterialesService {
         console.log(resp);
         return resp;
       }));
+    }
+
+    reporte() {
+      const url = BASE_URL + `/pdf/materiales`;
+
+      const headerConfig = {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
+        'Authorization': `bearer ${this.jwtService.getToken}`
+      };
+      // tslint:disable-next-line:no-debugger
+
+      const token = this.jwtService.getToken();
+
+      if (token) {
+        headerConfig['Authorization'] = `bearer ${token}`;
+      }
+
+      return this.httpClient.get(url, {responseType: 'blob'}).pipe(map((res) => {
+        // console.log('Blob', res);
+        const obj: any = res;
+        // console.log('obj: ', obj);
+        return new Blob([obj], {type: 'application/pdf'});
+      })).subscribe(blob => {
+        saveAs(blob, 'materiales.pdf');
+      }, error => {
+        console.log(error, 'Error al generar el reporte');
+      });
     }
 }

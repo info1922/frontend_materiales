@@ -72,15 +72,17 @@ export class LugaresService {
       // console.log('Id del lugar: ', lugar._id);
       // Actualizar
       url += '/' + lugar._id;
+
       return this.httpClient.put(url, lugar).pipe(map((resp: any) => {
         console.log('Actualizado correctamente');
-        this.onSuccess('Lugar actualizado correctamente', 'assets/toast/refresh.svg');
+        // this.onSuccess('Lugar actualizado correctamente', 'assets/toast/refresh.svg');
         return resp;
       }));
     } else {
       // Creando
       return this.httpClient.post(url, lugar).pipe(map((resp: any) => {
-        this.onSuccess('Lugar guardado correctamente', 'assets/toast/save.svg');
+        console.log('Guardado correctamente');
+        // this.onSuccess('Lugar guardado correctamente', 'assets/toast/save.svg');
         return resp;
       }));
     }
@@ -121,8 +123,8 @@ export class LugaresService {
     return this.httpClient.delete(url).pipe(map((resp: any) => {
       // console.log('Respuesta del servidor: ', resp);
       // console.log('Material borrado');
-      this.onSuccess('Lugar eliminado correctamente', 'assets/toast/trash.svg');
-      this.notify.clear();
+      // this.onSuccess('Lugar eliminado correctamente', 'assets/toast/trash.svg');
+      // this.notify.clear();
       return resp;
     }));
   }
@@ -150,9 +152,10 @@ export class LugaresService {
       return new Blob([obj], {type: 'application/pdf'});
     })).subscribe(blob => {
       // console.log('Blob', blob);
-      saveAs(blob, 'lugaressss.pdf');
+      // this.onSuccess('Resporte generado correctamente', 'Reporte guardado');
+      saveAs(blob, 'lugares.pdf');
     }, error => {
-      console.log(error, 'pdfff');
+      console.log(error, 'Error al generar el reporte');
     });
   }
 

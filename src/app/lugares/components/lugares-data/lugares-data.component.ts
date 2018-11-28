@@ -119,7 +119,7 @@ export class LugaresDataComponent implements OnInit {
   }
 
   generaPDF(tipo) {
-    console.log(tipo);
+    // console.log(tipo);
     // console.log('Generando pdf ...');
     this.lugarService.reporte();
   }

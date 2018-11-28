@@ -5,13 +5,17 @@
         <div class="card-entidad">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 title-entidad">Materiales</div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 title-entidad">Materiales</div>
+                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
 
-                        <button class="btn btn-primary btn-icon" [routerLink]="['/panel/materiales', 'nuevo']" routerLinkActive="router-link-active">
-                        <clr-icon shape="plus" style="margin-right: 5px">
-                        </clr-icon>Nuevo material
-                      </button>
+                        <button class="btn btn-success btn-icon" [routerLink]="['/panel/materiales', 'nuevo']" routerLinkActive="router-link-active">
+                            <clr-icon shape="plus" style="margin-right: 5px">
+                            </clr-icon>Nuevo material
+                        </button>
+                        <button (click)="generaPDF()" class="btn btn-primary btn-icon btnpdf" *ngIf="dataMateriales.length > 0">
+                        <clr-icon shape="file" style="margin-right: 5px">
+                        </clr-icon>Generar reporte
+                    </button>
                     </div>
                 </div>
 

@@ -14,7 +14,7 @@ import { PipesModule } from './pipes/pipes.module';
 // import { CalendarComponent } from './calendario/components/calendar/calendar.component';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import { ElectronService } from './services/electron.service';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { ElectronService } from './services/electron.service';
     BrowserAnimationsModule,
     ClrCheckboxNextModule ,
     ClarityModule,
+    ToastrModule.forRoot(),
     ClrFormsNextModule,
     FormsModule,
     ReactiveFormsModule,
@@ -35,6 +36,7 @@ import { ElectronService } from './services/electron.service';
     PipesModule,
     SnotifyModule
   ],
+  exports: [ToastrModule],
   providers: [ElectronService, SnotifyService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults}],
   bootstrap: [AppComponent]

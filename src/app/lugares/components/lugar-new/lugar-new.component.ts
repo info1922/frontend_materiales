@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {FormGroup, FormControl, Validators, NgForm} from '@angular/forms';
 import { LugaresService } from '../../services/lugares.service';
 import { Lugar, Lugares } from '../../models/lugares';
-import { SnotifyService, SnotifyPosition } from 'ng-snotify';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lugar-new',
@@ -12,12 +12,8 @@ import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 })
 export class LugarNewComponent implements OnInit {
 
-  style = 'material';
-  position: SnotifyPosition = SnotifyPosition.rightTop;
   title: string;
-
   exampleForm: FormGroup;
-
   lugar: Lugar = new Lugar('', '');
 
   // Imagen
@@ -28,18 +24,27 @@ export class LugarNewComponent implements OnInit {
   cargando = false;
   cargandoImagen = false;
   closed = true;
+  enableButton = false;
+  crear = false;
   //
 
   constructor(
     private router: Router,
     private lugaresService: LugaresService,
     private activatedRouter: ActivatedRoute,
-    private notify: SnotifyService) {
+    private toastr: ToastrService
+    ) {
       activatedRouter.params.subscribe(params => {
         // Obtener el id del lugar URL
         const id = params['id'];
         if (id !== 'nuevo') {
           this.cargarLugar(id);
+          this.enableButton = true;
+        } else {
+          this.lugar.nombre = '';
+          this.lugar.direccion = '';
+          this.enableButton = false;
+          this.lugar.img = undefined;
         }
       });
     }
@@ -53,7 +58,7 @@ export class LugarNewComponent implements OnInit {
       setTimeout(function() {
         this.cargandoImagen = true;
       }, 2000);
-      // this.cargandoImagen = true;
+      this.cargandoImagen = true;
     });
     this.sub = null;
   }
@@ -76,10 +81,13 @@ export class LugarNewComponent implements OnInit {
     // console.log('Datos del formulario:', this.lugar);
     this.lugaresService.crearLugar(this.lugar)
       .subscribe((data: any) => {
-        console.log(data);
+        // console.log(data);
         this.subirImagen(data.lugar._id);
         this.cargando = false;
+        // this.enableButton = false;
         this.router.navigate(['/panel/lugares', data.lugar._id]);
+        this.enableButton = true;
+        this.toastr.success('Registro guardado correctamente', 'Guardado');
       }, err => {
         console.log('Error al guardar el lugar');
       });
@@ -89,7 +97,6 @@ export class LugarNewComponent implements OnInit {
 
   returnLugares() {
     // window.location.href = '/panel/lugares';
-    this.notify.clear();
     this.router.navigate(['panel', 'lugares']);
 
     // this.onSuccess();

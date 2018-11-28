@@ -5,6 +5,8 @@ import { Materiales, Material } from '../../models/materiales';
 import { MaterialesService } from '../../services/materiales.service';
 import { Lugar } from 'src/app/lugares/models/lugares';
 import { LugaresService } from '../../../lugares/services/lugares.service';
+import { SnotifyService, SnotifyPosition } from 'ng-snotify';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-material-new',
@@ -22,12 +24,15 @@ export class MaterialNewComponent implements OnInit {
   asignar = false;
   cargando = false;
   imagenTem: any;
+  enableButton = false;
+  cargandoImagen = false;
 
   constructor(
     private router: Router,
     private materialService: MaterialesService,
     private lugarService: LugaresService,
-    private routerParams: ActivatedRoute
+    private routerParams: ActivatedRoute,
+    private toastr: ToastrService
     ) {
 
       routerParams.params.subscribe(params => {
@@ -35,12 +40,26 @@ export class MaterialNewComponent implements OnInit {
         const id  = params['id'];
         if (id !== 'nuevo') {
           this.crearMaterial(id);
+          this.enableButton = true;
+        } else {
+          this.enableButton = false;
+          this.material.title = '';
+          this.material.cantidad = 1;
+          this.material.lugar = undefined;
+          this.material.img = undefined;
         }
       });
     }
 
   ngOnInit() {
     this.crearFormulario();
+    this.cargandoImagen = false;
+    this.materialService.notificacion.subscribe(resp => {
+      this.cargandoImagen = false;
+      setTimeout(function() {
+        this.cargandoImagen = true;
+      }, 2000);
+    });
     this.sub = null;
 
     this.lugarService.getLugares()
@@ -71,11 +90,14 @@ export class MaterialNewComponent implements OnInit {
         this.subirImagen(data.matActual2._id);
         this.cargando = false;
         this.router.navigate(['/panel/materiales', data.matActual2._id]);
+        this.toastr.success('Registro guardado correctamente', 'Guardado');
+        this.enableButton = true;
       }, err => {
         console.log('Error al enviar datos', err);
       });
       this.imagenTem = null;
       this.materialForm.reset();
+      // this.material.img = undefined;
   }
 
   cambioLugar(id: string) {
@@ -128,6 +150,11 @@ export class MaterialNewComponent implements OnInit {
       console.log(material);
       this.material = material;
     });
+  }
+
+  rutaNuevo() {
+    this.router.navigateByUrl('/panel/materiales/nuevo');
+    // this.router.navigate(['/panel/materiales/nuevo']);
   }
 
 }

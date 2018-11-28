@@ -116,4 +116,10 @@ export class MaterialesDataComponent implements OnInit {
     });
   }
 
+  generaPDF() {
+    // console.log(tipo);
+    // console.log('Generando pdf ...');
+    this.materialService.reporte();
+  }
+
 }
