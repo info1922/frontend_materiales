@@ -1,5 +1,17 @@
 <div class="row">
     <ng-snotify class="{{style}}"></ng-snotify>
+    <clr-modal [(clrModalOpen)]="this.materialService.generarPdf" [clrModalClosable]="false">
+        <h3 class="modal-title text-center">Generando reporte</h3>
+        <div class="modal-body text-center">
+            <span class="spinner spinner-md">
+            </span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="opened = false">
+                Salir
+            </button>
+        </div>
+    </clr-modal>
     <div class="col-lg-8 clr-offset-lg-2 col-md-8 clr-offset-md-2 col-sm-12 col-xs-12">
 
         <div class="card-entidad">

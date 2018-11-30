@@ -27,6 +27,7 @@ export class MaterialesDataComponent implements OnInit {
     style = 'material';
     position: SnotifyPosition = SnotifyPosition.centerCenter;
 
+
     dataMateriales: Materiales[] = [];
     public material: Material[];
     public basic = false;

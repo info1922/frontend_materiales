@@ -17,6 +17,7 @@ export class MaterialesService {
   style = 'material';
   position: SnotifyPosition = SnotifyPosition.rightTop;
   img = `assets/toast/save.svg`;
+  generarPdf = false;
   public notificacion = new EventEmitter<any>();
 
   constructor(public httpClient: HttpClient,
@@ -151,9 +152,12 @@ export class MaterialesService {
         // console.log('Blob', res);
         const obj: any = res;
         // console.log('obj: ', obj);
+        this.generarPdf = true;
         return new Blob([obj], {type: 'application/pdf'});
       })).subscribe(blob => {
-        saveAs(blob, 'materiales.pdf');
+        // this.generarPdf = false;
+          saveAs(blob, 'materiales.pdf');
+        this.generarPdf = false;
       }, error => {
         console.log(error, 'Error al generar el reporte');
       });

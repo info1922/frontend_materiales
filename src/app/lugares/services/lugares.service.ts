@@ -21,6 +21,8 @@ export class LugaresService {
   position: SnotifyPosition = SnotifyPosition.rightTop;
   img = `assets/toast/save.svg`;
 
+  generarPdf = false;
+
   public notificacion = new EventEmitter<any>();
 
   constructor(private httpClient: HttpClient,
@@ -149,11 +151,15 @@ export class LugaresService {
       // console.log('Blob', res);
       const obj: any = res;
       // console.log('obj: ', obj);
+      this.generarPdf = true;
+      // console.log(this.generarPdf);
       return new Blob([obj], {type: 'application/pdf'});
     })).subscribe(blob => {
       // console.log('Blob', blob);
       // this.onSuccess('Resporte generado correctamente', 'Reporte guardado');
       saveAs(blob, 'lugares.pdf');
+      this.generarPdf = false;
+      // console.log(this.generarPdf);
     }, error => {
       console.log(error, 'Error al generar el reporte');
     });

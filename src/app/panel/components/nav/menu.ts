@@ -9,7 +9,7 @@ export class VerticalNavCases {
                 label: 'Principal',
                 icon: 'home',
                 submenu: [
-                    {label: 'Panel pricipal', url: 'panel'}
+                    {label: 'Panel pricipal', url: ''}
                 ]
             },
             // {
