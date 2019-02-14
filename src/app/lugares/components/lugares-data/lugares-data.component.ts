@@ -13,7 +13,7 @@ import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 export class LugaresDataComponent implements OnInit {
 
   constructor( private router: Router,
-    private lugarService: LugaresService,
+    public lugarService: LugaresService,
     private jwtService: JwtService,
     private notify: SnotifyService) { }
 

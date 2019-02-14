@@ -4,59 +4,56 @@
 // ::-webkit-scrollbar {
 //     display: none;
 // }
-body {
-    overflow-y: hidden !important;
-    // height: 80%;
-}
-
-::-webkit-scrollbar {
-    display: none !important;
-}
-
-.contet-area {
-    overflow-y: auto !important;
-}
-
-.container_1 {
-    // display: grid;
-    grid-template-rows: 25px auto auto;
-    header {
-        height: 25px;
-        display: grid;
-        grid-template-columns: 85% auto;
-        strong {
-            -webkit-app-region: drag;
-            color: #fff;
-            span {
-                margin-left: 10px;
-                color: rgb(177, 174, 174);
-            }
-        }
-        nav {
-            justify-self: right;
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                li {
-                    width: 25px;
-                    // border-style: dotted;
-                    border-color: gray;
-                    border-width: 1px;
-                    float: left;
-                    // margin-left: 8px;
-                    cursor: pointer;
-                    clr-icon {
-                        display: inline;
-                    }
-                }
-                .li_1 :hover {
-                    color: rgb(87, 154, 255) !important;
-                }
-                .li_2 :hover {
-                    color: rgb(230, 74, 53);
-                }
-            }
-        }
-    }
-}
+// body {
+//     overflow-y: hidden !important;
+//     // height: 80%;
+// }
+// ::-webkit-scrollbar {
+//     display: none !important;
+// }
+// .contet-area {
+//     overflow-y: auto !important;
+// }
+// .container_1 {
+//     // display: grid;
+//     grid-template-rows: 25px auto auto;
+//     header {
+//         height: 25px;
+//         display: grid;
+//         grid-template-columns: 85% auto;
+//         strong {
+//             -webkit-app-region: drag;
+//             color: #fff;
+//             span {
+//                 margin-left: 10px;
+//                 color: rgb(177, 174, 174);
+//             }
+//         }
+//         nav {
+//             justify-self: right;
+//             ul {
+//                 list-style-type: none;
+//                 margin: 0;
+//                 padding: 0;
+//                 li {
+//                     width: 25px;
+//                     // border-style: dotted;
+//                     border-color: gray;
+//                     border-width: 1px;
+//                     float: left;
+//                     // margin-left: 8px;
+//                     cursor: pointer;
+//                     clr-icon {
+//                         display: inline;
+//                     }
+//                 }
+//                 .li_1 :hover {
+//                     color: rgb(87, 154, 255) !important;
+//                 }
+//                 .li_2 :hover {
+//                     color: rgb(230, 74, 53);
+//                 }
+//             }
+//         }
+//     }
+// }

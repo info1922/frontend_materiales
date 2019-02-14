@@ -15,7 +15,7 @@ export class MaterialesDataComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private materialService: MaterialesService,
+    public materialService: MaterialesService,
     private jwtService: JwtService,
     private notify: SnotifyService
     ) { }

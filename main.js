@@ -15,7 +15,7 @@ function createWindow() {
         y: 80,
         width: 1300,
         height: 700,
-        frame: false
+        frame: true
     });
 
     // y carga el archivo index.html de la aplicación.
@@ -38,7 +38,7 @@ function createWindow() {
     // }));
 
     // Abre las herramientas de desarrollo (DevTools).
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     // Emitido cuando la ventana es cerrada.
     win.on('closed', () => {
